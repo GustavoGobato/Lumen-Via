@@ -1,0 +1,15 @@
+[
+  {
+    "cep": "04424-010",
+    "nome": "Buraco perigoso",
+    "tipo": "buraco",
+    "raio": 100
+  },
+  {
+    "lat": -23.6829,
+    "lon": -46.6407,
+    "nome": "Área de risco",
+    "tipo": "risco",
+    "raio": 80
+  }
+]

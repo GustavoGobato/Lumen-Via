@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VIAVERDE | Rotas Inteligentes e Sustentáveis</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="app-container">
@@ -17,40 +17,63 @@
     <nav class="navbar">
       <div class="navbar-container">
         <div class="logo">
-          <span class="logo-icon">V</span>
-          <span class="logo-text">VIAVERDE</span>
+          <div class="logo-icon">V</div>
+          <span>VIAVERDE</span>
         </div>
-        <div class="nav-links">
-          <a href="#features">Benefícios</a>
-          <a href="#about">Sobre</a>
-          <a href="#contact">Contato</a>
-        </div>
-        <button class="mobile-menu-btn">
-          <i class="fas fa-bars"></i>
-        </button>
       </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-content">
-        <h1 class="hero-title">Rotas <span class="highlight">inteligentes</span> para um trajeto melhor</h1>
+        <h1 class="hero-title">Rotas <span class="highlight">inteligentes</span> para sua segurança</h1>
         <p class="hero-subtitle">Evite áreas perigosas, buracos e congestionamentos com nossa tecnologia de roteamento avançada</p>
         
-        <div class="search-container">
-          <div class="search-input-group">
+        <div class="input-section">
+          <div class="input-group">
+            <label for="start">Endereço de Origem:</label>
             <div class="input-with-icon">
               <i class="fas fa-map-marker-alt"></i>
-              <input type="text" id="start" placeholder="Endereço de origem">
+              <input type="text" id="start" placeholder="Digite o endereço inicial">
             </div>
+          </div>
+
+          <div class="input-group">
+            <label for="end">Endereço de Destino:</label>
             <div class="input-with-icon">
               <i class="fas fa-flag-checkered"></i>
-              <input type="text" id="end" placeholder="Endereço de destino">
+              <input type="text" id="end" placeholder="Digite o endereço final">
             </div>
-            <button id="calculate" class="primary-btn">
-              <span>Calcular Rota</span>
-              <i class="fas fa-route"></i>
-            </button>
+          </div>
+
+          <button id="calculate" class="primary-btn">
+            <span>Calcular Rota</span>
+            <i class="fas fa-route"></i>
+          </button>
+
+          <div id="error"></div>
+
+          <div id="results">
+            <div class="results-container">
+              <div class="result-card">
+                <div class="result-icon">
+                  <i class="fas fa-road"></i>
+                </div>
+                <div class="result-content">
+                  <h3>Distância</h3>
+                  <p id="distance">-</p>
+                </div>
+              </div>
+              <div class="result-card">
+                <div class="result-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="result-content">
+                  <h3>Tempo estimado</h3>
+                  <p id="duration">-</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -58,142 +81,6 @@
         <div id="map"></div>
       </div>
     </section>
-
-    <!-- Results Section -->
-    <section id="results" class="results-section" style="display: none;">
-      <div class="results-container">
-        <div class="result-card">
-          <div class="result-icon">
-            <i class="fas fa-road"></i>
-          </div>
-          <div class="result-content">
-            <h3>Distância</h3>
-            <p id="distance">-</p>
-          </div>
-        </div>
-        <div class="result-card">
-          <div class="result-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <div class="result-content">
-            <h3>Tempo estimado</h3>
-            <p id="duration">-</p>
-          </div>
-        </div>
-        <div class="result-card">
-          <div class="result-icon">
-            <i class="fas fa-leaf"></i>
-          </div>
-          <div class="result-content">
-            <h3>Impacto ecológico</h3>
-            <p id="eco-impact">Baixo</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features-section">
-      <div class="section-header">
-        <h2>Por que escolher o <span class="highlight">VIAVERDE</span>?</h2>
-        <p>Tecnologia avançada para sua segurança e conforto</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <h3>Segurança</h3>
-          <p>Evitamos áreas com altos índices de criminalidade e ruas perigosas durante a noite</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-car-side"></i>
-          </div>
-          <h3>Conforto</h3>
-          <p>Rotas que priorizam vias bem pavimentadas, evitando buracos e obstáculos</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-leaf"></i>
-          </div>
-          <h3>Sustentabilidade</h3>
-          <p>Trajetos otimizados para reduzir consumo de combustível e emissões de CO2</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-bolt"></i>
-          </div>
-          <h3>Eficiência</h3>
-          <p>Algoritmos inteligentes que consideram tráfego em tempo real para economizar seu tempo</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about-section">
-      <div class="about-container">
-        <div class="about-content">
-          <h2>Tecnologia <span class="highlight">avançada</span> para mobilidade urbana</h2>
-          <p>O VIAVERDE utiliza inteligência artificial e análise de dados para criar rotas que vão além da simples distância entre pontos. Nossos algoritmos consideram múltiplos fatores para proporcionar a melhor experiência de navegação.</p>
-          <ul class="about-features">
-            <li><i class="fas fa-check-circle"></i> Dados atualizados diariamente</li>
-            <li><i class="fas fa-check-circle"></i> Integração com órgãos de trânsito</li>
-            <li><i class="fas fa-check-circle"></i> Relatórios de usuários em tempo real</li>
-          </ul>
-        </div>
-        <div class="about-image">
-          <div class="tech-graphic">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <div class="cta-container">
-        <h2>Pronto para experimentar?</h2>
-        <p>Comece agora e descubra a diferença de uma rota realmente inteligente</p>
-        <button class="primary-btn">Calcular minha rota</button>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-brand">
-          <div class="logo">
-            <span class="logo-icon">V</span>
-            <span class="logo-text">VIAVERDE</span>
-          </div>
-          <p>Tecnologia em mobilidade urbana</p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <h3>Links</h3>
-          <a href="#features">Benefícios</a>
-          <a href="#about">Tecnologia</a>
-          <a href="#">API</a>
-          <a href="#">Parceiros</a>
-        </div>
-        <div class="footer-contact" id="contact">
-          <h3>Contato</h3>
-          <p><i class="fas fa-envelope"></i> contato@viaverde.com</p>
-          <p><i class="fas fa-phone"></i> (11) 1234-5678</p>
-          <p><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2023 VIAVERDE. Todos os direitos reservados.</p>
-      </div>
-    </footer>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
