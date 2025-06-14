@@ -1,3 +1,24 @@
+// Novo problemas.json de exemplo:
+// Salve como problemas.json na mesma pasta do seu HTML
+
+/*
+[
+  {
+    "cep": "04475-060",
+    "nome": "Buraco perigoso",
+    "tipo": "buraco",
+    "raio": 100
+  },
+  {
+    "lat": -23.6829,
+    "lon": -46.6407,
+    "nome": "Área de risco",
+    "tipo": "risco",
+    "raio": 80
+  }
+]
+*/
+
 const ORS_API_KEY = '5b3ce3597851110001cf6248808852743a2c4b4db7eb20f055825b4b';
 
 const calculateBtn = document.getElementById("calculate");
