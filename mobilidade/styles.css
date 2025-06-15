@@ -14,6 +14,7 @@
       --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
       --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --animation-duration: 0.5s;
     }
 
     * {
@@ -36,6 +37,24 @@
       min-height: 100vh;
     }
 
+    /* Animações */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+      100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+    }
+
     /* Navbar */
     .navbar {
       background-color: var(--tertiary);
@@ -43,6 +62,35 @@
       position: fixed;
       width: 100%;
       z-index: 1000;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .navbar.scrolled {
+      padding: 0.5rem 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar.scrolled .navbar-container {
+      padding: 0.5rem 2rem;
+    }
+
+    .navbar.scrolled .logo {
+      font-size: 1.2rem;
+    }
+
+    .navbar.scrolled .logo-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .navbar.scrolled .nav-tab {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .navbar.scrolled .nav-tab i {
+      font-size: 0.9rem;
     }
 
     .navbar-container {
@@ -52,6 +100,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: var(--transition);
     }
 
     .logo {
@@ -61,6 +110,11 @@
       font-weight: 700;
       font-size: 1.5rem;
       color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      transform: translateY(-2px);
     }
 
     .logo-icon {
@@ -72,6 +126,103 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      animation: pulse 2s infinite;
+      transition: var(--transition);
+    }
+
+    /* Nav Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 1rem;
+      transition: var(--transition);
+    }
+
+    .nav-tab {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      color: var(--gray-700);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-tab i {
+      transition: var(--transition);
+    }
+
+    .nav-tab::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--secondary);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+
+    .nav-tab:hover {
+      color: var(--primary);
+      background-color: var(--gray-100);
+    }
+
+    .nav-tab:hover::before {
+      transform: scaleX(1);
+    }
+
+    .nav-tab.active {
+      color: var(--primary);
+      background-color: var(--gray-100);
+    }
+
+    .nav-tab.active::before {
+      transform: scaleX(1);
+    }
+
+    .nav-tab.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .nav-tab.disabled:hover {
+      background-color: transparent;
+    }
+
+    .nav-tab.disabled::before {
+      display: none;
+    }
+
+    /* Button Animations */
+    .primary-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .primary-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .primary-btn:active::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .primary-btn:hover {
+      animation: glow 2s infinite;
     }
 
     /* Hero Section */
