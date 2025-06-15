@@ -22,6 +22,7 @@
 const ORS_API_KEY = '5b3ce3597851110001cf6248808852743a2c4b4db7eb20f055825b4b';
 
 const calculateBtn = document.getElementById("calculate");
+const openGoogleMapsBtn = document.getElementById("openGoogleMaps");
 const errorDiv = document.getElementById("error");
 const resultsDiv = document.getElementById("results");
 const distanceSpan = document.getElementById("distance");
@@ -94,6 +95,7 @@ async function calculateRoute() {
   const endAddr = document.getElementById("end").value.trim();
   errorDiv.style.display = 'none';
   resultsDiv.style.display = 'none';
+  openGoogleMapsBtn.style.display = 'none';
 
   try {
     calculateBtn.disabled = true;
@@ -163,6 +165,7 @@ async function calculateRoute() {
     distanceSpan.textContent = `${distancia} km`;
     durationSpan.textContent = `${duracao} min`;
     resultsDiv.style.display = 'block';
+    openGoogleMapsBtn.style.display = 'flex';
 
     if (routeLayer) map.removeLayer(routeLayer);
     clearMarkers();
@@ -198,6 +201,13 @@ async function calculateRoute() {
 }
 
 calculateBtn.addEventListener("click", calculateRoute);
+
+openGoogleMapsBtn.addEventListener("click", () => {
+  const startAddr = document.getElementById("start").value.trim();
+  const endAddr = document.getElementById("end").value.trim();
+  const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(startAddr)}&destination=${encodeURIComponent(endAddr)}`;
+  window.open(url, '_blank');
+});
 
 document.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') calculateRoute();
