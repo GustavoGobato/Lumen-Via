@@ -3,46 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMEN VIA | Soluções Inteligentes</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Lumen Via - Iluminação Inteligente</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
 <body>
-  <div class="app-container">
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="navbar-container">
-        <div class="logo">
-          <div class="logo-icon">L</div>
-          <span>LUMEN VIA</span>
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="#" class="logo">
+        <span class="logo-box">L</span>
+        <span class="logo-text">LUMEN VIA</span>
+      </a>
+      <div class="nav-links">
+        <a href="#inicio" class="active">
+          <i class="fas fa-home"></i>
+        </a>
+        <a href="#via-verde">Via Verde</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <h1>Iluminação Inteligente para Cidades do Futuro</h1>
+      <p>Transformando a infraestrutura urbana com tecnologia sustentável</p>
+    </div>
+  </section>
+
+  <!-- Soluções Section -->
+  <section id="solucoes" class="solucoes">
+    <div class="solucoes-content">
+      <h2>Nossas Soluções</h2>
+      <div class="solucoes-grid">
+        <div class="solucao-card">
+          <div class="solucao-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3>Lumen Report</h3>
+          <p>Plataforma para reportar postes e semáforos quebrados. Aciona automaticamente a equipe de manutenção, garantindo resposta rápida e monitoramento contínuo.</p>
         </div>
-        <div class="nav-tabs">
-          <a href="#" class="nav-tab active">
-            <i class="fas fa-leaf"></i>
-            <span>Via Verde</span>
-          </a>
-          <a href="#" class="nav-tab disabled">
-            <i class="fas fa-building"></i>
-            <span>Em breve</span>
-          </a>
-          <a href="#" class="nav-tab disabled">
-            <i class="fas fa-chart-line"></i>
-            <span>Em breve</span>
-          </a>
+        <div class="solucao-card">
+          <div class="solucao-icon">
+            <i class="fas fa-route"></i>
+          </div>
+          <h3>Via Verde</h3>
+          <p>Algoritmo que calcula as melhores rotas para equipes de manutenção e entregadores, otimizando tempo, recursos e reduzindo custos operacionais e emissões de CO₂.</p>
+        </div>
+        <div class="solucao-card">
+          <div class="solucao-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Lumen Safe</h3>
+          <p>O sistema identifica regiões com maior criminalidade, buracos e dificuldades na via, enviando notificações e ajustando o cálculo de rotas para evitar favelas e locais perigosos, aumentando a segurança dos usuários.</p>
         </div>
       </div>
-    </nav>
+    </div>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
+  <div class="app-container">
+    <section id="via-verde" class="hero-section">
       <div class="hero-content">
-        <h1 class="hero-title">Via Verde: Rotas <span class="highlight">sustentáveis</span> para um futuro melhor</h1>
+        <h1 class="hero-title">Via Verde: Rotas <span class="highlight">sustentáveis</span> para entregadores</h1>
         <p class="hero-subtitle">Calcule rotas otimizadas que priorizam vias mais seguras e eficientes, contribuindo para uma mobilidade mais sustentável</p>
-        
         <div class="input-section">
           <div class="input-group">
             <label for="start">Endereço de Origem:</label>
@@ -51,7 +78,6 @@
               <input type="text" id="start" placeholder="Digite o endereço inicial">
             </div>
           </div>
-
           <div class="input-group">
             <label for="end">Endereço de Destino:</label>
             <div class="input-with-icon">
@@ -59,20 +85,16 @@
               <input type="text" id="end" placeholder="Digite o endereço final">
             </div>
           </div>
-
           <button id="calculate" class="primary-btn">
             <span>Calcular Rota</span>
             <i class="fas fa-route"></i>
           </button>
-
           <button id="openGoogleMaps" class="primary-btn" style="display: none;">
             <span>Abrir no Google Maps</span>
             <i class="fab fa-google"></i>
           </button>
-
           <div id="error"></div>
-
-          <div id="results">
+          <div id="results" class="hidden">
             <div class="results-container">
               <div class="result-card">
                 <div class="result-icon">
@@ -102,7 +124,33 @@
     </section>
   </div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Lumen Via</h3>
+        <p>Transformando cidades com tecnologia sustentável</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contato</h3>
+        <p><i class="fas fa-envelope"></i> contatogobato@gmail.com</p>
+        <p><i class="fas fa-phone"></i> (11) 91263-4148</p>
+      </div>
+      <div class="footer-section">
+        <h3>Redes Sociais</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/_inovatechh/" target="_blank" class="social-link">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Lumen Via. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

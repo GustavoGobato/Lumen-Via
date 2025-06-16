@@ -139,6 +139,8 @@ async function calculateRoute() {
     const group = new L.featureGroup([routeLayer, startMarker, endMarker]);
     map.fitBounds(group.getBounds(), { padding: [50, 50] });
 
+    mostrarResultados();
+
   } catch (err) {
     console.error(err);
     errorDiv.textContent = err.message || "Erro ao buscar rota. Verifique os endereços e tente novamente.";
@@ -199,25 +201,98 @@ function addTabAnimations() {
   });
 }
 
-// Controle do header ao rolar
-function handleScrollHeader() {
-  const navbar = document.querySelector('.navbar');
-  const scrollPosition = window.scrollY;
+// Controle do header durante o scroll
+let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
+
+const handleScroll = () => {
+  const currentScroll = window.scrollY;
   
-  if (scrollPosition > 50) {
+  // Adiciona classe scrolled quando rolar mais que 50px
+  if (currentScroll > 50) {
     navbar.classList.add('scrolled');
   } else {
     navbar.classList.remove('scrolled');
   }
-}
-
-// Inicializar animações
-document.addEventListener('DOMContentLoaded', () => {
-  addButtonAnimations();
-  addTabAnimations();
   
-  // Adicionar evento de scroll
-  window.addEventListener('scroll', handleScrollHeader);
-  // Verificar posição inicial
-  handleScrollHeader();
+  lastScroll = currentScroll;
+};
+
+window.addEventListener('scroll', () => {
+  requestAnimationFrame(handleScroll);
 });
+
+// Smooth scroll para links do menu
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Garantir que as seções principais sejam visíveis
+document.addEventListener('DOMContentLoaded', () => {
+    const mainSections = document.querySelectorAll('.hero, .sobre');
+    mainSections.forEach(section => {
+        section.style.opacity = '1';
+        section.style.transform = 'none';
+    });
+});
+
+// Intersection Observer para animar as seções
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observa todas as seções
+document.querySelectorAll('section').forEach(section => {
+  observer.observe(section);
+});
+
+// Atualiza o link ativo no menu
+const updateActiveLink = () => {
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    const sectionHeight = section.clientHeight;
+    const scroll = window.scrollY;
+
+    if (scroll >= sectionTop && scroll < sectionTop + sectionHeight) {
+      const id = section.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+};
+
+window.addEventListener('scroll', updateActiveLink);
+
+// Função para exibir resultados após calcular rota
+function mostrarResultados() {
+  const results = document.getElementById('results');
+  if (results) {
+    results.classList.remove('hidden');
+  }
+}
