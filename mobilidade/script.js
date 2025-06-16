@@ -296,3 +296,86 @@ function mostrarResultados() {
     results.classList.remove('hidden');
   }
 }
+
+// Inicialização do mapa do Via Report
+let reportMap;
+let reportMarkers = [];
+
+function initReportMap() {
+  reportMap = L.map('report-map').setView([-23.5505, -46.6333], 13);
+  
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(reportMap);
+
+  // Adicionar alguns marcadores de exemplo
+  const exampleProblems = [
+    {
+      type: 'poste',
+      lat: -23.5505,
+      lng: -46.6333,
+      description: 'Poste quebrado na Avenida Paulista'
+    },
+    {
+      type: 'buraco',
+      lat: -23.5605,
+      lng: -46.6433,
+      description: 'Buraco na Rua Augusta'
+    },
+    {
+      type: 'acidente',
+      lat: -23.5405,
+      lng: -46.6233,
+      description: 'Acidente na Marginal Tietê'
+    }
+  ];
+
+  exampleProblems.forEach(problem => {
+    addProblemMarker(problem);
+  });
+}
+
+function addProblemMarker(problem) {
+  let icon;
+  let color;
+
+  switch(problem.type) {
+    case 'poste':
+      icon = 'lightbulb';
+      color = '#ff4444';
+      break;
+    case 'buraco':
+      icon = 'road';
+      color = '#ff8800';
+      break;
+    case 'acidente':
+      icon = 'car-crash';
+      color = '#ff0000';
+      break;
+  }
+
+  const marker = L.marker([problem.lat, problem.lng], {
+    icon: L.divIcon({
+      html: `<i class="fas fa-${icon}" style="color: ${color}; font-size: 24px;"></i>`,
+      className: 'custom-marker',
+      iconSize: [24, 24]
+    })
+  }).addTo(reportMap);
+
+  marker.bindPopup(problem.description);
+  reportMarkers.push(marker);
+}
+
+// Inicializar o mapa quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+  initReportMap();
+  
+  // Adicionar evento ao botão de reportar
+  const reportBtn = document.getElementById('report-problem');
+  if (reportBtn) {
+    reportBtn.addEventListener('click', () => {
+      // Aqui vamos implementar o modal de reporte depois
+      alert('Funcionalidade de reporte será implementada em breve!');
+    });
+  }
+});

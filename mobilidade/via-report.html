@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Via Report - Lumen Via</title>
+  <link rel="stylesheet" href="styles-common.css">
+  <link rel="stylesheet" href="via-report.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <span class="logo-box">L</span>
+        <span class="logo-text">LUMEN VIA</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#inicio"><i class="fas fa-home"></i></a>
+        <a href="via-verde.html">Via Verde</a>
+        <a href="via-report.html" class="active">Via Report</a>
+      </div>
+    </div>
+  </nav>
+  <div class="app-container">
+    <section id="via-report" class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Via Report: <span class="highlight">Reporte</span> problemas na via</h1>
+        <p class="hero-subtitle">Ajude a manter as vias mais seguras reportando postes quebrados, buracos e acidentes</p>
+      </div>
+      <div class="map-container">
+        <div id="report-map"></div>
+        <div class="report-controls">
+          <button class="report-btn" id="report-problem">
+            <i class="fas fa-exclamation-circle"></i>
+            Reportar Problema
+          </button>
+          <div class="legend">
+            <div class="legend-item">
+              <i class="fas fa-lightbulb" style="color: #ff4444;"></i>
+              <span>Poste Quebrado</span>
+            </div>
+            <div class="legend-item">
+              <i class="fas fa-road" style="color: #ff8800;"></i>
+              <span>Buraco</span>
+            </div>
+            <div class="legend-item">
+              <i class="fas fa-car-crash" style="color: #ff0000;"></i>
+              <span>Acidente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="via-report.js"></script>
+</body>
+</html> 
