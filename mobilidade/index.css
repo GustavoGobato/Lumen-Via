@@ -6,15 +6,29 @@
   justify-content: center;
   text-align: center;
   padding: 4rem 2rem;
-  background: #fff;
+  background: linear-gradient(120deg, #fff 70%, #f8fafc 100%);
   overflow: hidden;
+  box-shadow: 0 4px 24px 0 rgba(52, 152, 219, 0.04);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.65) 60%, #fff 100%), url('../assets/inovatech.jpg') center center/cover no-repeat;
+  opacity: 2.5;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -23,6 +37,13 @@
   color: var(--primary);
   margin-bottom: 1.5rem;
   line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(52, 152, 219, 0.08);
+  transition: color 0.3s;
+}
+
+.hero h1 .highlight, .solucoes-content h2 .highlight {
+  color: var(--secondary);
+  font-weight: 700;
 }
 
 .hero p {
@@ -34,12 +55,29 @@
 
 .solucoes {
   padding: 6rem 2rem;
-  background: #fff;
+  background: linear-gradient(120deg, #fff 70%, #f8fafc 100%);
+  position: relative;
+}
+
+.solucoes::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.975), rgba(255, 255, 255, 0.975)), url('../assets/inovatech.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.025;
+  z-index: 0;
 }
 
 .solucoes-content {
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .solucoes-content h2 {
@@ -52,7 +90,7 @@
 
 .solucoes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
 
@@ -60,8 +98,9 @@
   background: white;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+  box-shadow: 0 2px 12px 0 rgba(52, 152, 219, 0.07);
+  border: 1.5px solid #f3f3f3;
+  transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -71,14 +110,17 @@
 }
 
 .solucao-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 8px 32px 0 rgba(52, 152, 219, 0.13);
+  border: 1.5px solid var(--secondary);
+  transform: translateY(-8px) scale(1.03);
 }
 
 .solucao-icon {
   width: 64px;
   height: 64px;
-  background: var(--gray-100);
+  background: linear-gradient(135deg, #fffbe6 60%, #fff 100%);
+  border: 2px solid #ffe066;
+  box-shadow: 0 2px 8px 0 rgba(255, 215, 0, 0.08);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -106,14 +148,29 @@
   font-weight: 600;
   color: var(--primary);
   margin-bottom: 1rem;
+  letter-spacing: 0.5px;
 }
 
 .solucao-card p {
   color: var(--text);
   line-height: 1.6;
+  opacity: 0.92;
+}
+
+@media (max-width: 1200px) {
+  .solucoes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
+  .hero {
+    background: #fff;
+  }
+  .solucoes {
+    background: #fff;
+  }
+
   .hero h1 {
     font-size: 2.5rem;
   }
@@ -131,10 +188,19 @@
   }
 
   .solucoes-grid {
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
   .solucao-card {
     padding: 1.5rem;
   }
+
+  .banner-inovatech {
+    height: 120px;
+  }
+}
+
+.banner-inovatech {
+  display: none;
 } 

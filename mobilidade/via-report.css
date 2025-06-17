@@ -142,4 +142,133 @@
     bottom: 1rem;
     top: auto;
   }
+}
+
+.report-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30, 32, 38, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  transition: opacity 0.3s;
+}
+
+.report-modal.hidden {
+  display: none;
+}
+
+.report-modal-content {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(52, 152, 219, 0.18);
+  padding: 2.5rem 2rem 2rem 2rem;
+  min-width: 320px;
+  max-width: 95vw;
+  width: 370px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  animation: modalIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalIn {
+  from { transform: translateY(40px) scale(0.98); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.report-modal-content h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.report-modal-content label {
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0.2rem;
+}
+
+.report-modal-content select,
+.report-modal-content textarea {
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  margin-bottom: 0.5rem;
+  background: var(--gray-100);
+  transition: border 0.2s;
+}
+
+.report-modal-content select:focus,
+.report-modal-content textarea:focus {
+  border-color: var(--secondary);
+  outline: none;
+}
+
+.report-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.primary-btn {
+  background: var(--secondary);
+  color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.primary-btn:hover {
+  background: #ffe066;
+  box-shadow: 0 2px 8px 0 rgba(255, 215, 0, 0.12);
+}
+
+.secondary-btn {
+  background: var(--gray-200);
+  color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.secondary-btn:hover {
+  background: var(--gray-500);
+  color: #fff;
+}
+
+.report-success {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2ecc40;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.9rem 2.2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 rgba(46, 204, 64, 0.13);
+  font-size: 1.1rem;
+  z-index: 3000;
+  opacity: 0.97;
+  transition: opacity 0.3s;
+}
+
+.report-success.hidden {
+  display: none;
 } 

@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Via Verde - Lumen Via</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles-common.css">
   <link rel="stylesheet" href="via-verde.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
 <body>
@@ -17,7 +18,9 @@
         <span class="logo-text">LUMEN VIA</span>
       </a>
       <div class="nav-links">
-        <a href="index.html#inicio"><i class="fas fa-home"></i></a>
+        <a href="index.html#inicio">
+          <i class="fas fa-home"></i>
+        </a>
         <a href="via-verde.html" class="active">Via Verde</a>
         <a href="via-report.html">Via Report</a>
       </div>
@@ -78,6 +81,17 @@
       </div>
       <div class="hero-graphic">
         <div id="map"></div>
+        <div id="route-alert-modal" class="route-alert-modal hidden">
+          <div class="route-alert-content">
+            <h2>Atenção: Problema na rota</h2>
+            <p id="route-alert-text"></p>
+            <div class="route-alert-actions">
+              <button id="route-divert-btn" class="primary-btn">Sim, desviar</button>
+              <button id="route-ignore-btn" class="secondary-btn">Não, continuar</button>
+            </div>
+          </div>
+        </div>
+        <div id="route-success" class="route-success hidden">Desvio feito com sucesso!</div>
       </div>
     </section>
   </div>

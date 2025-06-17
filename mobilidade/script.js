@@ -28,11 +28,15 @@ const resultsDiv = document.getElementById("results");
 const distanceSpan = document.getElementById("distance");
 const durationSpan = document.getElementById("duration");
 
-let map = L.map('map').setView([-14.2350, -51.9253], 4);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors',
-  className: 'map-tiles'
-}).addTo(map);
+let map;
+const mapElement = document.getElementById('map');
+if (mapElement) {
+  map = L.map('map').setView([-14.2350, -51.9253], 4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    className: 'map-tiles'
+  }).addTo(map);
+}
 
 let routeLayer;
 let markers = [];
@@ -151,14 +155,18 @@ async function calculateRoute() {
   }
 }
 
-calculateBtn.addEventListener("click", calculateRoute);
+if (calculateBtn) {
+  calculateBtn.addEventListener("click", calculateRoute);
+}
 
-openGoogleMapsBtn.addEventListener("click", () => {
-  const startAddr = document.getElementById("start").value.trim();
-  const endAddr = document.getElementById("end").value.trim();
-  const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(startAddr)}&destination=${encodeURIComponent(endAddr)}`;
-  window.open(url, '_blank');
-});
+if (openGoogleMapsBtn) {
+  openGoogleMapsBtn.addEventListener("click", () => {
+    const startAddr = document.getElementById("start").value.trim();
+    const endAddr = document.getElementById("end").value.trim();
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(startAddr)}&destination=${encodeURIComponent(endAddr)}`;
+    window.open(url, '_blank');
+  });
+}
 
 document.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') calculateRoute();

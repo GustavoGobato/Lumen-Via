@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Via Report - Lumen Via</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles-common.css">
   <link rel="stylesheet" href="via-report.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
 <body>
@@ -17,7 +18,9 @@
         <span class="logo-text">LUMEN VIA</span>
       </a>
       <div class="nav-links">
-        <a href="index.html#inicio"><i class="fas fa-home"></i></a>
+        <a href="index.html#inicio">
+          <i class="fas fa-home"></i>
+        </a>
         <a href="via-verde.html">Via Verde</a>
         <a href="via-report.html" class="active">Via Report</a>
       </div>
@@ -31,6 +34,7 @@
       </div>
       <div class="map-container">
         <div id="report-map"></div>
+        <div id="report-success" class="report-success hidden">Problema reportado com sucesso!</div>
         <div class="report-controls">
           <button class="report-btn" id="report-problem">
             <i class="fas fa-exclamation-circle"></i>
@@ -48,6 +52,25 @@
             <div class="legend-item">
               <i class="fas fa-car-crash" style="color: #ff0000;"></i>
               <span>Acidente</span>
+            </div>
+          </div>
+        </div>
+        <div id="report-modal" class="report-modal hidden">
+          <div class="report-modal-content">
+            <h2>Reportar Problema</h2>
+            <label for="report-type">Tipo:</label>
+            <select id="report-type">
+              <option value="poste">Poste Quebrado</option>
+              <option value="buraco">Buraco</option>
+              <option value="acidente">Acidente</option>
+              <option value="semaforo">Semáforo</option>
+              <option value="via">Problema em Via</option>
+            </select>
+            <label for="report-desc">Descrição:</label>
+            <textarea id="report-desc" rows="3" placeholder="Descreva o problema..."></textarea>
+            <div class="report-modal-actions">
+              <button id="send-report-btn" class="primary-btn">Enviar</button>
+              <button id="close-report-btn" class="secondary-btn">Cancelar</button>
             </div>
           </div>
         </div>
