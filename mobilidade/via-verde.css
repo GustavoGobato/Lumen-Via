@@ -216,11 +216,18 @@
   width: 100vw;
   height: 100vh;
   background: rgba(30, 32, 38, 0.35);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 3000;
   transition: opacity 0.3s;
+  animation: fadeInBg 0.3s;
+}
+
+@keyframes fadeInBg {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .route-alert-modal.hidden {
@@ -229,37 +236,117 @@
 
 .route-alert-content {
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px 0 rgba(52, 152, 219, 0.18);
-  padding: 2.2rem 2rem 1.5rem 2rem;
+  border-radius: 22px;
+  box-shadow: 0 12px 40px 0 rgba(52, 152, 219, 0.18);
+  padding: 2.5rem 2rem 2rem 2rem;
   min-width: 320px;
   max-width: 95vw;
-  width: 370px;
+  width: 390px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
   position: relative;
-  animation: modalIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  align-items: center;
+  animation: modalIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalIn {
+  from { transform: translateY(40px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
 .route-alert-content h2 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+
+.route-alert-problem-icon {
+  font-size: 2.7rem;
+  margin-bottom: 0.2rem;
+  color: var(--secondary);
+  animation: iconPop 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes iconPop {
+  0% { transform: scale(0.7); opacity: 0; }
+  70% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
 }
 
 .route-alert-content p {
   color: var(--primary);
-  font-size: 1rem;
+  font-size: 1.08rem;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .route-alert-actions {
   display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
+  gap: 1.2rem;
+  justify-content: center;
   margin-top: 0.5rem;
+}
+
+.route-alert-actions .primary-btn {
+  background: var(--secondary);
+  color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.05rem;
+  box-shadow: var(--shadow-md);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.route-alert-actions .primary-btn:hover {
+  background: #ffe066;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 24px 0 rgba(255, 215, 0, 0.13);
+}
+
+.route-alert-actions .secondary-btn {
+  background: #ff4444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 16px 0 rgba(255, 68, 68, 0.13);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.route-alert-actions .secondary-btn:hover {
+  background: #ff2222;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 32px 0 rgba(255, 68, 68, 0.18);
+}
+
+.route-alert-actions button:active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120%;
+  height: 120%;
+  background: rgba(255,255,255,0.18);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  animation: rippleBtn 0.4s linear;
+  pointer-events: none;
+  z-index: 2;
+}
+@keyframes rippleBtn {
+  0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.7); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
 }
 
 .route-success {
@@ -281,4 +368,90 @@
 
 .route-success.hidden {
   display: none;
+}
+
+.show-problem-btn {
+  margin: 1.2rem auto 0 auto;
+  display: block;
+  background: linear-gradient(90deg, var(--secondary) 60%, #ffe066 100%);
+  color: var(--primary);
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.08rem;
+  box-shadow: 0 4px 16px 0 rgba(255, 215, 0, 0.13);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+.show-problem-btn:hover {
+  background: linear-gradient(90deg, #ffe066 60%, var(--secondary) 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 32px 0 rgba(255, 215, 0, 0.18);
+}
+.show-problem-btn:active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120%;
+  height: 120%;
+  background: rgba(255,255,255,0.18);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  animation: rippleBtn 0.4s linear;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.route-alert-modal.minimized {
+  width: 340px;
+  height: auto;
+  top: 24px;
+  left: unset;
+  right: 24px;
+  bottom: unset;
+  background: rgba(30, 32, 38, 0.18);
+  box-shadow: 0 4px 24px 0 rgba(52, 152, 219, 0.13);
+  border-radius: 16px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  animation: fadeInBg 0.3s;
+}
+
+.route-alert-modal.minimized .route-alert-content {
+  padding: 1.1rem 1rem 1rem 1rem;
+  width: 100%;
+  min-width: unset;
+  max-width: unset;
+  gap: 0.5rem;
+  font-size: 0.98rem;
+  box-shadow: none;
+  border-radius: 12px;
+  animation: none;
+}
+
+.problem-highlight-marker {
+  animation: markerPulse 1.2s infinite cubic-bezier(0.4,0,0.2,1);
+  z-index: 4000 !important;
+}
+@keyframes markerPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.5); }
+  70% { box-shadow: 0 0 0 16px rgba(255, 215, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+.problem-distance-line {
+  stroke: #ffe066;
+  stroke-width: 5;
+  stroke-dasharray: 8 8;
+  filter: drop-shadow(0 0 8px #ffe066);
+  animation: lineDraw 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes lineDraw {
+  from { stroke-dashoffset: 100; opacity: 0; }
+  to { stroke-dashoffset: 0; opacity: 1; }
 } 

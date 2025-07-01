@@ -189,22 +189,44 @@ async function showProblemsOnRoute(routeCoords) {
       return dist < min ? dist : min;
     }, Infinity);
     if (nearest < 0.0005) {
-      const icon = iconMap[report.type]?.icon || 'question';
-      const color = iconMap[report.type]?.color || '#888';
-      L.marker([report.lat, report.lng], {
-        icon: L.divIcon({
-          className: 'custom-marker',
-          html: `<i class=\"fas fa-${icon}\" style=\"color: ${color}; font-size: 24px;\"></i>`,
-          iconSize: [24, 24]
-        })
-      }).addTo(map).bindPopup(`<b>${report.type.charAt(0).toUpperCase() + report.type.slice(1)}</b><br>${report.description || ''}`);
-      // Distância em km (aprox)
-      const distKm = nearest * 111.32;
       routeProblemsQueue.push(report);
-      routeProblemsDistances.push(distKm);
+      routeProblemsDistances.push(nearest * 111.32); // Aproximação para km
     }
   });
   showNextRouteAlert();
+}
+
+// Adicionar função utilitária para obter ícone do problema
+function getProblemIcon(tipo) {
+  switch (tipo) {
+    case 'buraco': return 'road';
+    case 'policial': return 'user-shield';
+    case 'crime': return 'exclamation-triangle';
+    case 'acidente': return 'car-crash';
+    case 'poste': return 'lightbulb';
+    case 'semaforo': return 'traffic-light';
+    default: return 'question-circle';
+  }
+}
+
+// Variáveis globais para controle do problema exibido
+let problemMarker = null;
+let problemLine = null;
+let lastProblemCoords = null;
+let lastProblemInfo = null;
+
+// Função utilitária para encontrar o ponto mais próximo da rota ao problema
+function pontoMaisProximoDaRota(problemLat, problemLng, routeCoords) {
+  let minDist = Infinity;
+  let closest = null;
+  routeCoords.forEach(([lat, lng]) => {
+    const dist = Math.sqrt(Math.pow(lat - problemLat, 2) + Math.pow(lng - problemLng, 2));
+    if (dist < minDist) {
+      minDist = dist;
+      closest = [lat, lng];
+    }
+  });
+  return closest;
 }
 
 // Função para calcular rota
@@ -257,13 +279,135 @@ async function calculateRoute() {
     // Mostrar problemas na rota
     await showProblemsOnRoute(routeCoords);
 
-    // Distância e duração reais
-    const distance = (route.properties.summary.distance / 1000).toFixed(2) + ' km';
-    const duration = Math.round(route.properties.summary.duration / 60) + ' minutos';
-    distanceElement.textContent = distance;
-    durationElement.textContent = duration;
-    resultsDiv.classList.remove('hidden');
-    openGoogleMapsButton.style.display = 'block';
+    // Após calcular a rota e antes de exibir a rota no mapa:
+    // Gerar problema aleatório
+    const tiposProblema = [
+      { tipo: 'buraco', descricao: 'Buraco na pista' },
+      { tipo: 'policial', descricao: 'Blitz policial' },
+      { tipo: 'crime', descricao: 'Ocorrência de crime recente' },
+      { tipo: 'acidente', descricao: 'Acidente de trânsito' },
+      { tipo: 'poste', descricao: 'Poste quebrado' },
+      { tipo: 'semaforo', descricao: 'Semáforo quebrado' }
+    ];
+    const problemaSorteado = tiposProblema[Math.floor(Math.random() * tiposProblema.length)];
+    // Gerar raio fictício entre 0.5km e 5km
+    const raioProblema = (Math.random() * 4.5 + 0.5).toFixed(2);
+    // Posição do problema: próximo ao meio da rota
+    let problemaLat = null;
+    let problemaLng = null;
+    if (routeCoords && routeCoords.length > 0) {
+      const meio = Math.floor(routeCoords.length / 2);
+      problemaLat = routeCoords[meio][0] + (Math.random() - 0.5) * 0.01;
+      problemaLng = routeCoords[meio][1] + (Math.random() - 0.5) * 0.01;
+    } else {
+      problemaLat = startCoords[0] + (Math.random() - 0.5) * 0.01;
+      problemaLng = startCoords[1] + (Math.random() - 0.5) * 0.01;
+    }
+    // Mostrar modal customizado
+    const modal = document.getElementById('route-alert-modal');
+    const modalText = document.getElementById('route-alert-text');
+    const iconClass = getProblemIcon(problemaSorteado.tipo);
+    modalText.innerHTML = `
+      <div class='route-alert-problem-icon'><i class="fas fa-${iconClass}"></i></div>
+      <strong>Tipo:</strong> ${problemaSorteado.descricao}<br>
+      <strong>Distância até o problema:</strong> ${raioProblema} km<br><br>
+      Deseja continuar na rota mais otimizada?`;
+    modal.classList.remove('hidden');
+    const btnDesviar = document.getElementById('route-divert-btn');
+    const btnIgnorar = document.getElementById('route-ignore-btn');
+    function fecharModal() {
+      modal.classList.add('hidden');
+      btnDesviar.removeEventListener('click', onDesviar);
+      btnIgnorar.removeEventListener('click', onIgnorar);
+    }
+    function onDesviar() {
+      fecharModal();
+      // Distância e duração reais
+      const distance = (route.properties.summary.distance / 1000).toFixed(2) + ' km';
+      const duration = Math.round(route.properties.summary.duration / 60) + ' minutos';
+      distanceElement.textContent = distance;
+      durationElement.textContent = duration;
+      resultsDiv.classList.remove('hidden');
+      openGoogleMapsButton.style.display = 'block';
+      // Remover destaque
+      if (problemMarker) { map.removeLayer(problemMarker); problemMarker = null; }
+      if (problemLine) { map.removeLayer(problemLine); problemLine = null; }
+      // Adicionar ícone pequeno vermelho de alerta no ponto mais próximo da rota
+      if (lastProblemInfo && lastProblemInfo.closest) {
+        problemMarker = L.marker(lastProblemInfo.closest, {
+          icon: L.divIcon({
+            html: `<i class='fas fa-exclamation-triangle' style='color:#ff4444;'></i>`,
+            className: 'custom-marker',
+            iconSize: [18, 18]
+          })
+        }).addTo(map);
+      }
+    }
+    function onIgnorar() {
+      fecharModal();
+      // Apagar rota do mapa
+      if (routeLine) {
+        routeLine.remove();
+        routeLine = null;
+      }
+      // Apagar marcadores
+      markers.forEach(marker => marker.remove());
+      markers = [];
+      // Limpar campos de endereço
+      if (startInput) startInput.value = '';
+      if (endInput) endInput.value = '';
+      // Remover destaque e ícone de alerta
+      if (problemMarker) { map.removeLayer(problemMarker); problemMarker = null; }
+      if (problemLine) { map.removeLayer(problemLine); problemLine = null; }
+    }
+    btnDesviar.addEventListener('click', onDesviar);
+    btnIgnorar.addEventListener('click', onIgnorar);
+
+    const btnShowProblem = document.getElementById('route-show-problem-btn');
+    btnShowProblem.onclick = () => {
+      // Minimizar modal
+      modal.classList.add('minimized');
+      // Adicionar marcador do problema
+      if (problemMarker) { map.removeLayer(problemMarker); problemMarker = null; }
+      if (problemLine) { map.removeLayer(problemLine); problemLine = null; }
+      const iconClass = getProblemIcon(problemaSorteado.tipo);
+      problemMarker = L.marker([problemaLat, problemaLng], {
+        icon: L.divIcon({
+          html: `<i class='fas fa-${iconClass}'></i>`,
+          className: 'custom-marker problem-highlight-marker',
+          iconSize: [32, 32]
+        })
+      }).addTo(map);
+      // Calcular ponto mais próximo da rota
+      const closestPoint = pontoMaisProximoDaRota(problemaLat, problemaLng, routeCoords);
+      // Linha animada da origem até o ponto mais próximo da rota
+      problemLine = L.polyline([
+        [closestPoint[0], closestPoint[1]],
+        [problemaLat, problemaLng]
+      ], {
+        color: '#ffe066',
+        weight: 5,
+        dashArray: '8 8',
+        className: 'problem-distance-line'
+      }).addTo(map);
+      // Popup criativo
+      const distKm = (Math.sqrt(Math.pow(closestPoint[0] - problemaLat, 2) + Math.pow(closestPoint[1] - problemaLng, 2)) * 111.32).toFixed(2);
+      problemMarker.bindPopup(`<b>${problemaSorteado.descricao}</b><br>Distância: <span style='color:#ff4444;font-weight:700;'>${distKm} km</span><br><span style='font-size:0.95em;'>⚡ Atenção: desvie se possível!</span>`).openPopup();
+      // Zoom no problema
+      map.setView([problemaLat, problemaLng], 16, { animate: true });
+      // Salvar para restaurar
+      lastProblemCoords = [problemaLat, problemaLng];
+      lastProblemInfo = { tipo: problemaSorteado.tipo, descricao: problemaSorteado.descricao, distancia: distKm, closest: closestPoint };
+    };
+    // Restaurar modal ao clicar nele minimizado
+    modal.onclick = (e) => {
+      if (modal.classList.contains('minimized') && e.target === modal) {
+        modal.classList.remove('minimized');
+        if (lastProblemCoords && map) {
+          map.setView(lastProblemCoords, 16, { animate: true });
+        }
+      }
+    };
   } catch (error) {
     errorElement.textContent = 'Erro ao calcular a rota. Por favor, tente novamente.';
     console.error('Erro:', error);
@@ -293,20 +437,71 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Exibir todos os problemas fictícios no mapa
-function showAllFakePointsOnMap() {
-  fakePoints.forEach(point => {
-    const icon = iconMap[point.type]?.icon || 'question';
-    const color = iconMap[point.type]?.color || '#888';
-    L.marker([point.lat, point.lng], {
-      icon: L.divIcon({
-        className: 'custom-marker',
-        html: `<i class=\"fas fa-${icon}\" style=\"color: ${color}; font-size: 24px;\"></i>`,
-        iconSize: [24, 24]
-      })
-    }).addTo(map).bindPopup(`<b>${point.type.charAt(0).toUpperCase() + point.type.slice(1)}</b><br>${point.description || ''}`);
-  });
+// Lista global de problemas para o Via Verde (igual ao Via Report)
+const globalProblems = [
+  // Poste Quebrado
+  { type: 'poste', lat: -23.5505, lng: -46.6333, description: 'Poste quebrado na Av. Paulista, São Paulo, SP' },
+  { type: 'poste', lat: -22.9083, lng: -43.1964, description: 'Poste quebrado na Lapa, Rio de Janeiro, RJ' },
+  { type: 'poste', lat: -3.7277, lng: -38.5270, description: 'Poste quebrado no Meireles, Fortaleza, CE' },
+  // Buraco
+  { type: 'buraco', lat: -23.5610, lng: -46.6550, description: 'Buraco na Av. Paulista, São Paulo, SP' },
+  { type: 'buraco', lat: -22.9068, lng: -43.1729, description: 'Buraco em Copacabana, Rio de Janeiro, RJ' },
+  { type: 'buraco', lat: -3.7319, lng: -38.5267, description: 'Buraco na Aldeota, Fortaleza, CE' },
+  // Acidente
+  { type: 'acidente', lat: -23.5405, lng: -46.6233, description: 'Acidente na Marginal Tietê, São Paulo, SP' },
+  { type: 'acidente', lat: -22.9707, lng: -43.1823, description: 'Acidente na Lagoa, Rio de Janeiro, RJ' },
+  { type: 'acidente', lat: -3.7350, lng: -38.5290, description: 'Acidente na Av. Beira Mar, Fortaleza, CE' },
+  // Policial
+  { type: 'policial', lat: -23.5489, lng: -46.6388, description: 'Blitz policial na Praça da Sé, São Paulo, SP' },
+  { type: 'policial', lat: -22.9121, lng: -43.2302, description: 'Blitz policial na Barra da Tijuca, Rio de Janeiro, RJ' },
+  { type: 'policial', lat: -3.7327, lng: -38.5270, description: 'Blitz policial no Centro, Fortaleza, CE' },
+  // Crime
+  { type: 'crime', lat: -23.5550, lng: -46.6460, description: 'Crime recente na República, São Paulo, SP' },
+  { type: 'crime', lat: -22.9150, lng: -43.1970, description: 'Crime recente em Santa Teresa, Rio de Janeiro, RJ' },
+  { type: 'crime', lat: -3.7300, lng: -38.5280, description: 'Crime recente em Meireles, Fortaleza, CE' },
+  // Pouca luz
+  { type: 'pouca_luz', lat: -19.9160, lng: -43.9340, description: 'Pouca luz na Savassi, Belo Horizonte, MG' },
+  { type: 'pouca_luz', lat: -8.0470, lng: -34.8775, description: 'Pouca luz em Boa Viagem, Recife, PE' },
+  { type: 'pouca_luz', lat: -30.0340, lng: -51.2170, description: 'Pouca luz no Centro Histórico, Porto Alegre, RS' },
+  // Semáforo
+  { type: 'semaforo', lat: -23.5610, lng: -46.6550, description: 'Semáforo quebrado na Av. Paulista, São Paulo, SP' },
+  { type: 'semaforo', lat: -22.9080, lng: -43.1960, description: 'Semáforo quebrado na Lapa, Rio de Janeiro, RJ' },
+  { type: 'semaforo', lat: -3.7310, lng: -38.5260, description: 'Semáforo quebrado na Aldeota, Fortaleza, CE' },
+  // Sem energia
+  { type: 'sem_energia', lat: -16.6860, lng: -49.2640, description: 'Sem energia no Setor Bueno, Goiânia, GO' },
+  { type: 'sem_energia', lat: -10.9470, lng: -37.0735, description: 'Sem energia no Centro, Aracaju, SE' },
+  { type: 'sem_energia', lat: -27.5950, lng: -48.5485, description: 'Sem energia no Centro, Florianópolis, SC' },
+  // Periculosidade
+  { type: 'periculosidade', lat: -15.7930, lng: -47.8820, description: 'Área de periculosidade na Esplanada, Brasília, DF' },
+  { type: 'periculosidade', lat: -12.9770, lng: -38.5010, description: 'Área de periculosidade no Pelourinho, Salvador, BA' },
+  { type: 'periculosidade', lat: -1.4555, lng: -48.5025, description: 'Área de periculosidade no Umarizal, Belém, PA' },
+];
+
+function addProblemMarker(problem) {
+  let icon;
+  let color;
+  switch(problem.type) {
+    case 'poste': icon = 'lightbulb'; color = '#ff4444'; break;
+    case 'buraco': icon = 'road'; color = '#ff8800'; break;
+    case 'acidente': icon = 'car-crash'; color = '#ff0000'; break;
+    case 'policial': icon = 'user-shield'; color = '#007bff'; break;
+    case 'crime': icon = 'exclamation-triangle'; color = '#ff4444'; break;
+    case 'pouca_luz': icon = 'moon'; color = '#888'; break;
+    case 'semaforo': icon = 'traffic-light'; color = '#2ecc40'; break;
+    case 'sem_energia': icon = 'bolt'; color = '#ffbb00'; break;
+    case 'periculosidade': icon = 'skull-crossbones'; color = '#222'; break;
+    default: icon = 'question'; color = '#888';
+  }
+  const marker = L.marker([problem.lat, problem.lng], {
+    icon: L.divIcon({
+      html: `<i class=\"fas fa-${icon}\" style=\"color: ${color}; font-size: 24px;\"></i>`,
+      className: 'custom-marker',
+      iconSize: [24, 24]
+    }),
+    interactive: false // Torna o marcador não clicável
+  }).addTo(map);
 }
 
-// Chamar ao carregar a página
-showAllFakePointsOnMap(); 
+document.addEventListener('DOMContentLoaded', () => {
+  // Remover o loop que adiciona todos os problemas globais ao carregar o mapa
+}); 

@@ -203,4 +203,37 @@
 
 .banner-inovatech {
   display: none;
+}
+
+.problem-filter-menu {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2001;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px 0 rgba(52, 152, 219, 0.13);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.problem-filter-menu select {
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 0.4rem 1.2rem;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--primary);
+  font-weight: 600;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.problem-filter-menu select:focus {
+  border-color: var(--secondary);
 } 
