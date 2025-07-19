@@ -189,6 +189,31 @@
 }
 .report-modal.hidden { display: none; }
 
+/* Estilização da barra de rolagem do modal */
+.report-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.report-modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.report-modal-content::-webkit-scrollbar-thumb {
+  background: #ffd600;
+  border-radius: 3px;
+}
+
+.report-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #ffe066;
+}
+
+/* Para Firefox */
+.report-modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: #ffd600 #f1f1f1;
+}
+
 .report-modal-content {
   background: #fff;
   border-radius: 22px;
@@ -197,12 +222,15 @@
   min-width: 320px;
   max-width: 95vw;
   width: 400px;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   position: relative;
   align-items: center;
   animation: modalIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 @keyframes modalIn {
   from { transform: translateY(40px) scale(0.95); opacity: 0; }
@@ -285,9 +313,6 @@
   border-color: var(--secondary);
   outline: none;
 }
-.form-group input[type="file"] {
-  margin-top: 0.5rem;
-}
 .location-group {
   display: flex;
   flex-direction: column;
@@ -345,6 +370,7 @@
   .report-modal-content {
     width: 98vw;
     min-width: unset;
+    max-height: 85vh;
     padding: 1.2rem 0.5rem 1rem 0.5rem;
   }
   .fab-report-btn {
@@ -536,11 +562,6 @@
   min-height: 60px;
   resize: vertical;
   padding: 10px;
-}
-#report-modal input[type="file"] {
-  background: none;
-  border: none;
-  margin: 0 0 10px 0;
 }
 
 /* Botão de enviar estilizado */

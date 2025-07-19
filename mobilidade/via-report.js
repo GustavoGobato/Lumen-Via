@@ -78,32 +78,100 @@ async function fetchReports() {
 
 // Função para exibir denúncias no mapa
 async function showReportsOnMap() {
-  if (window.reportMarkers) {
-    window.reportMarkers.forEach(m => m.remove());
+  // Inicializar array se não existir
+  if (!window.reportMarkers) {
+    window.reportMarkers = [];
   }
-  window.reportMarkers = [];
 
   const reports = await fetchReports();
+  
+  // Adicionar apenas novos reports que ainda não estão no mapa
   reports.forEach(report => {
-    const iconType = report.type === 'poste' ? 'lightbulb' : report.type === 'buraco' ? 'road' : 'car-crash';
-    const color = report.type === 'poste' ? '#ff4444' : report.type === 'buraco' ? '#ff8800' : '#ff0000';
-    const marker = L.marker([report.lat, report.lng], {
-      icon: L.divIcon({
-        className: 'custom-marker',
-        html: `<i class="fas fa-${iconType}" style="color: ${color}; font-size: 24px;"></i>`,
-        iconSize: [24, 24]
-      })
-    }).addTo(map);
-    marker.bindPopup(`<b>${report.type.charAt(0).toUpperCase() + report.type.slice(1)}</b><br>${report.description || ''}`);
-    window.reportMarkers.push(marker);
+    // Verificar se este report já existe no mapa
+    const existingMarker = window.reportMarkers.find(marker => 
+      marker._latlng.lat === report.lat && 
+      marker._latlng.lng === report.lng && 
+      marker._reportType === report.type
+    );
+    
+    if (!existingMarker) {
+      const { icon, color } = getReportIconAndColor(report.type);
+      const marker = L.marker([report.lat, report.lng], {
+        icon: L.divIcon({
+          className: 'custom-marker',
+          html: `<i class="fas fa-${icon}" style="color: ${color}; font-size: 24px;"></i>`,
+          iconSize: [24, 24]
+        })
+      }).addTo(map);
+      
+      marker.bindPopup(`<b>${report.type.charAt(0).toUpperCase() + report.type.slice(1)}</b><br>${report.description || ''}`);
+      marker._reportType = report.type; // Marcar o tipo para identificação
+      window.reportMarkers.push(marker);
+    }
   });
+}
+
+// Função para adicionar apenas um novo marcador
+function addNewReportMarker(report) {
+  const { icon, color } = getReportIconAndColor(report.type);
+  const marker = L.marker([report.lat, report.lng], {
+    icon: L.divIcon({
+      className: 'custom-marker',
+      html: `<i class="fas fa-${icon}" style="color: ${color}; font-size: 24px;"></i>`,
+      iconSize: [24, 24]
+    })
+  }).addTo(map);
+  
+  marker.bindPopup(`<b>${report.type.charAt(0).toUpperCase() + report.type.slice(1)}</b><br>${report.description || ''}`);
+  marker._reportType = report.type;
+  window.reportMarkers.push(marker);
 }
 
 // Função para registrar nova denúncia (agora local)
 async function sendReport(type, lat, lng, description) {
-  saveLocalReport({ type, lat, lng, description, date: new Date().toISOString() });
+  const newReport = { type, lat, lng, description, date: new Date().toISOString() };
+  saveLocalReport(newReport);
   await showReportsOnMap();
 }
+
+// Função para limpar todos os relatórios quando o site for fechado
+function clearReportsOnClose() {
+  // Limpar localStorage
+  localStorage.removeItem('reports');
+  
+  // Limpar marcadores do mapa
+  if (window.reportMarkers) {
+    window.reportMarkers.forEach(marker => {
+      if (map.hasLayer(marker)) {
+        map.removeLayer(marker);
+      }
+    });
+    window.reportMarkers = [];
+  }
+  
+  // Limpar marcadores do Via Safe também
+  if (window.problemMarkers) {
+    window.problemMarkers.forEach(marker => {
+      if (window.safeMap && window.safeMap.hasLayer(marker)) {
+        window.safeMap.removeLayer(marker);
+      }
+    });
+    window.problemMarkers = [];
+  }
+}
+
+// Adicionar listener para quando a página for fechada (apenas quando realmente fechar)
+window.addEventListener('pagehide', function(e) {
+  // Só limpar se realmente estiver fechando o site
+  if (e.persisted === false) {
+    clearReportsOnClose();
+  }
+});
+
+// NÃO limpar quando mudar de aba ou recarregar
+window.addEventListener('beforeunload', function(e) {
+  // Não fazer nada aqui - só limpar no pagehide
+});
 
 // Função para obter ícone e cor do tipo de problema
 function getReportIconAndColor(type) {
@@ -325,7 +393,6 @@ reportForm.addEventListener('submit', function(e) {
   e.preventDefault();
   const type = reportForm.elements['report-type'].value;
   const description = reportForm.elements['report-description'].value;
-  const photo = reportForm.elements['report-photo'].files[0];
   if (!selectedLatLng) {
     showErrorAlert('Selecione um local no mapa para reportar!');
     return;
@@ -334,21 +401,27 @@ reportForm.addEventListener('submit', function(e) {
     showErrorAlert('Selecione o tipo de problema!');
     return;
   }
+  
+  // Salvar o report
+  const newReport = { type, lat: selectedLatLng[0], lng: selectedLatLng[1], description, date: new Date().toISOString() };
+  saveLocalReport(newReport);
+  
   // Fechar modal imediatamente
   reportModal.classList.add('hidden');
+  
   // Mostrar overlay central animado
   showCentralSuccess('Problema reportado com sucesso!', () => {
     // Após animação, dar zoom e adicionar marcador
     map.setView(selectedLatLng, 17, { animate: true, duration: 1.2 });
-    const { icon, color } = getReportIconAndColor(type);
-    const marker = L.marker(selectedLatLng, {
-      icon: L.divIcon({
-        html: `<i class=\"fas fa-${icon}\" style=\"color: ${color}; font-size: 32px;\"></i>` + (photo ? '<i class=\"fas fa-camera\" style=\"color:#888; font-size: 0.9em; position:absolute; right:-8px; bottom:-8px;\"></i>' : ''),
-        className: 'custom-marker',
-        iconSize: [32, 32]
-      })
-    }).addTo(map);
-    window.reportMarkers.push(marker);
+    
+    // Adicionar novo marcador
+    addNewReportMarker(newReport);
+    
+    // Atualizar problemas no Via Safe imediatamente
+    if (window.safeMap && typeof window.addNewProblemToSafe === 'function') {
+      console.log('Adicionando novo problema ao Via Safe...');
+      window.addNewProblemToSafe(newReport);
+    }
   });
 });
 
@@ -363,4 +436,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       });
     }
   });
+});
+
+// Inicializar marcadores quando a página carrega
+document.addEventListener('DOMContentLoaded', () => {
+  showReportsOnMap();
 }); 
