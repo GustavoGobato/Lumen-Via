@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Via Quiz - Lumen Via</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles-common.css">
+  <link rel="stylesheet" href="styles/via-quiz.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <span class="logo-box">L</span>
+        <span class="logo-text">LUMEN VIA</span>
+      </a>
+      
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i></a>
+        <a href="via-verde.html">Via Verde</a>
+        <a href="via-report.html">Via Report</a>
+        <a href="via-quiz.html" class="active">Via Quiz</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="via-quiz-app-container">
+    <section class="via-quiz-hero-section">
+      <div class="via-quiz-hero-content">
+        <h1>Via Quiz: <span class="via-quiz-highlight">Teste</span> seu conhecimento</h1>
+        <p class="via-quiz-subtitle">Desafie-se com perguntas sobre mobilidade sustentável e torne-se um agente de mudança</p>
+      </div>
+      
+      <div class="via-quiz-container">
+        <div class="via-quiz-intro" id="via-quiz-intro">
+          <div class="via-quiz-card">
+            <h2>Quiz de Mobilidade Sustentável</h2>
+            <p>Este quiz contém 15 perguntas sobre transporte sustentável, energias renováveis e impacto ambiental.</p>
+            <div class="via-quiz-stats">
+              <div class="via-quiz-stat-item">
+                <i class="fas fa-question-circle"></i>
+                <span>15 Perguntas</span>
+              </div>
+              <div class="via-quiz-stat-item">
+                <i class="fas fa-award"></i>
+                <span>Níveis de Dificuldade</span>
+              </div>
+              <div class="via-quiz-stat-item">
+                <i class="fas fa-lightbulb"></i>
+                <span>Explicações Detalhadas</span>
+              </div>
+            </div>
+<button class="via-quiz-start-btn" id="via-quiz-start">Começar Quiz</button>
+          </div>
+        </div>
+        
+        <div class="via-quiz-questions via-quiz-hidden" id="via-quiz-questions">
+          <div class="via-quiz-header">
+            <div class="via-quiz-progress">
+              <div class="via-quiz-progress-bar" id="via-quiz-progress-bar"></div>
+              <span id="via-quiz-progress-text">1/15</span>
+            </div>
+            <div class="via-quiz-score-display">
+              <i class="fas fa-star"></i>
+              <span id="via-quiz-score">0</span> pontos
+            </div>
+          </div>
+          
+          <div class="via-quiz-question-container">
+            <h3 class="via-quiz-question-text" id="via-quiz-question"></h3>
+            <div class="via-quiz-options" id="via-quiz-options"></div>
+          </div>
+          
+          <div class="via-quiz-feedback via-quiz-hidden" id="via-quiz-feedback">
+            <div class="via-quiz-feedback-content">
+              <i class="fas" id="via-quiz-feedback-icon"></i>
+              <p id="via-quiz-feedback-text"></p>
+              <button class="via-quiz-next-btn" id="via-quiz-next">Próxima Pergunta</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="via-quiz-results via-quiz-hidden" id="via-quiz-results">
+          <div class="via-quiz-results-card">
+            <h2>Seu Resultado</h2>
+            <div class="via-quiz-score-circle">
+              <div class="via-quiz-circle-progress" id="via-quiz-circle-progress">
+                <span id="via-quiz-final-score">0</span>%
+              </div>
+            </div>
+            <p id="via-quiz-result-message"></p>
+            <div class="via-quiz-result-details">
+              <div class="via-quiz-detail-item via-quiz-correct">
+                <span id="via-quiz-correct-answers">0</span> corretas
+              </div>
+              <div class="via-quiz-detail-item via-quiz-wrong">
+                <span id="via-quiz-wrong-answers">0</span> erradas
+              </div>
+            </div>
+            <div class="via-quiz-result-actions">
+              <button class="via-quiz-restart-btn" id="via-quiz-restart">Refazer Quiz</button>
+              <button class="via-quiz-share-btn" id="via-quiz-share">
+                <i class="fas fa-share-alt"></i> Compartilhar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./functions/navbar.js"></script>
+<script src="scripts/via-quiz.js"></script>
+</body>
+</html>

@@ -5,28 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Via Verde - Lumen Via</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-common.css">
-  <link rel="stylesheet" href="via-verde.css">
+  <link rel="stylesheet" href="styles/styles-common.css">
+  <link rel="stylesheet" href="styles/via-verde.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
 <body>
   <nav class="navbar">
-    <div class="nav-content">
-      <a href="index.html" class="logo">
-        <span class="logo-box">L</span>
-        <span class="logo-text">LUMEN VIA</span>
-      </a>
-      <div class="nav-links">
-        <a href="index.html#inicio">
-          <i class="fas fa-home"></i>
-        </a>
-        <a href="via-verde.html" class="active">Via Verde</a>
-        <a href="via-report.html">Via Report</a>
-        <a href="via-safe.html">Via Safe</a>
-      </div>
+  <div class="nav-content">
+    <a href="index.html" class="logo">
+      <span class="logo-box">L</span>
+      <span class="logo-text">LUMEN VIA</span>
+    </a>
+    
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-  </nav>
+    
+    <div class="nav-links">
+      <a href="index.html" class="active"><i class="fas fa-home"></i></a>
+      <a href="via-verde.html">Via Verde</a>
+      <a href="via-report.html">Via Report</a>
+      <a href="via-quiz.html">Via Quiz</a>
+    </div>
+  </div>
+</nav>
   <div class="app-container">
     <section id="via-verde" class="hero-section">
       <div class="hero-content">
@@ -98,6 +103,7 @@
     </section>
   </div>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="via-verde.js"></script>
+  <script src="scripts/via-verde.js"></script>
+  <script src="./functions/navbar.js"></script>
 </body>
 </html> 

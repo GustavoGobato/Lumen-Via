@@ -18,7 +18,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.65) 60%, #fff 100%), url('../assets/inovatech.jpg') center center/cover no-repeat;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.65) 60%, #fff 100%), url('./assets/inovatech.jpg') center center/cover no-repeat;
   opacity: 2.5;
   z-index: 0;
   pointer-events: none;
