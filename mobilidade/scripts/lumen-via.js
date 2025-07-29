@@ -437,7 +437,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Lista global de problemas para o Via Verde (igual ao Via Report)
+// Lista global de problemas para o Lumen Via (igual ao Via Report)
 const globalProblems = [
   // Poste Quebrado
   { type: 'poste', lat: -23.5505, lng: -46.6333, description: 'Poste quebrado na Av. Paulista, São Paulo, SP' },
@@ -504,4 +504,218 @@ function addProblemMarker(problem) {
 
 document.addEventListener('DOMContentLoaded', () => {
   // Remover o loop que adiciona todos os problemas globais ao carregar o mapa
-}); 
+});
+
+// --- Sistema de Reporte de Problemas (adaptado do via-report.js) ---
+
+// Elementos do sistema de reporte
+const openReportModalBtn = document.getElementById('open-report-modal');
+const reportModal = document.getElementById('report-modal');
+const closeReportModalBtn = document.getElementById('close-report-modal');
+const reportForm = document.getElementById('report-form');
+const reportSuccess = document.getElementById('report-success');
+const useMyLocationBtn = document.getElementById('use-my-location');
+const reportLocationInput = document.getElementById('report-location');
+let selectedLatLng = null;
+let tempMarker = null;
+let tempMarkerTimeout = null;
+let errorAlertDiv = null;
+
+// Função para mostrar alerta de erro animado
+function showErrorAlert(msg) {
+  if (errorAlertDiv) errorAlertDiv.remove();
+  errorAlertDiv = document.createElement('div');
+  errorAlertDiv.className = 'report-error-alert';
+  errorAlertDiv.innerHTML = `<i class='fas fa-exclamation-triangle'></i> ${msg}`;
+  document.body.appendChild(errorAlertDiv);
+  setTimeout(() => {
+    errorAlertDiv.classList.add('visible');
+  }, 10);
+  setTimeout(() => {
+    errorAlertDiv.classList.remove('visible');
+    setTimeout(() => errorAlertDiv.remove(), 400);
+  }, 2200);
+}
+
+// Abrir modal
+if (openReportModalBtn) {
+  openReportModalBtn.addEventListener('click', async () => {
+    if (tempMarker) { map.removeLayer(tempMarker); tempMarker = null; }
+    reportModal.classList.remove('hidden');
+    reportModal.classList.add('modal-anim-in');
+    setTimeout(() => reportModal.classList.remove('modal-anim-in'), 500);
+    reportSuccess.classList.add('hidden');
+    reportForm.reset();
+    // Limpar localização ao abrir modal
+    if (selectedLatLng) {
+      await updateLocationInput(selectedLatLng[0], selectedLatLng[1]);
+    } else {
+      reportLocationInput.value = '';
+    }
+    updateUseMyLocationBtn();
+  });
+}
+
+// Fechar modal
+if (closeReportModalBtn) {
+  closeReportModalBtn.addEventListener('click', () => {
+    reportModal.classList.add('hidden');
+    if (tempMarker) { map.removeLayer(tempMarker); tempMarker = null; }
+  });
+}
+
+// Selecionar localização no mapa
+map.on('click', async function(e) {
+  if (tempMarker) { map.removeLayer(tempMarker); tempMarker = null; }
+  tempMarker = L.marker([e.latlng.lat, e.latlng.lng], {
+    icon: L.divIcon({
+      html: `<i class='fas fa-map-marker-alt temp-marker-anim'></i>`,
+      className: 'custom-marker',
+      iconSize: [32, 32]
+    }),
+    interactive: false
+  }).addTo(map);
+  selectedLatLng = [e.latlng.lat, e.latlng.lng];
+  await updateLocationInput(e.latlng.lat, e.latlng.lng);
+  updateUseMyLocationBtn();
+  // Destacar botão de reportar problema
+  const fabBtn = document.getElementById('open-report-modal');
+  if (fabBtn) {
+    fabBtn.classList.add('highlight-fab-btn');
+    setTimeout(() => fabBtn.classList.remove('highlight-fab-btn'), 1200);
+  }
+  if (tempMarkerTimeout) clearTimeout(tempMarkerTimeout);
+  tempMarkerTimeout = setTimeout(() => {
+    if (tempMarker) { map.removeLayer(tempMarker); tempMarker = null; }
+  }, 10000);
+});
+
+// Atualizar campo de localização
+async function updateLocationInput(lat, lng) {
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+    const data = await response.json();
+    reportLocationInput.value = data.display_name || `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  } catch {
+    reportLocationInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  }
+}
+
+// Usar minha localização
+if (useMyLocationBtn) {
+  useMyLocationBtn.addEventListener('click', () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        selectedLatLng = [pos.coords.latitude, pos.coords.longitude];
+        await updateLocationInput(pos.coords.latitude, pos.coords.longitude);
+        map.setView(selectedLatLng, 16, { animate: true });
+        if (tempMarker) { map.removeLayer(tempMarker); tempMarker = null; }
+        tempMarker = L.marker(selectedLatLng, {
+          icon: L.divIcon({
+            html: `<i class='fas fa-map-marker-alt temp-marker-anim'></i>`,
+            className: 'custom-marker',
+            iconSize: [32, 32]
+          }),
+          interactive: false
+        }).addTo(map);
+        updateUseMyLocationBtn();
+      });
+    }
+  });
+}
+
+function updateUseMyLocationBtn() {
+  if (!useMyLocationBtn) return;
+  if (selectedLatLng) {
+    useMyLocationBtn.style.display = 'none';
+  } else {
+    useMyLocationBtn.style.display = 'block';
+  }
+}
+
+// Salvar report localmente
+function saveLocalReport(report) {
+  const reports = getLocalReports();
+  reports.push(report);
+  localStorage.setItem('reports', JSON.stringify(reports));
+}
+
+// Adicionar marcador de novo report
+function addNewReportMarker(report) {
+  let icon, color;
+  switch(report.type) {
+    case 'poste': icon = 'lightbulb'; color = '#ff4444'; break;
+    case 'buraco': icon = 'road'; color = '#ff8800'; break;
+    case 'acidente': icon = 'car-crash'; color = '#ff0000'; break;
+    case 'policial': icon = 'user-shield'; color = '#007bff'; break;
+    case 'crime': icon = 'exclamation-triangle'; color = '#ff4444'; break;
+    case 'pouca_luz': icon = 'moon'; color = '#888'; break;
+    case 'semaforo': icon = 'traffic-light'; color = '#2ecc40'; break;
+    case 'sem_energia': icon = 'bolt'; color = '#ffbb00'; break;
+    case 'periculosidade': icon = 'skull-crossbones'; color = '#222'; break;
+    default: icon = 'question'; color = '#888';
+  }
+  const marker = L.marker([report.lat, report.lng], {
+    icon: L.divIcon({
+      className: 'custom-marker',
+      html: `<i class="fas fa-${icon}" style="color: ${color}; font-size: 24px;"></i>`,
+      iconSize: [24, 24]
+    })
+  }).addTo(map);
+  marker.bindPopup(`<b>${report.type.charAt(0).toUpperCase() + report.type.slice(1)}</b><br>${report.description || ''}`);
+}
+
+// Enviar reporte
+if (reportForm) {
+  reportForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const type = reportForm.elements['report-type'].value;
+    const description = reportForm.elements['report-description'].value;
+    if (!selectedLatLng) {
+      showErrorAlert('Selecione um local no mapa para reportar!');
+      return;
+    }
+    if (!type) {
+      showErrorAlert('Selecione o tipo de problema!');
+      return;
+    }
+    // Salvar o report
+    const newReport = { type, lat: selectedLatLng[0], lng: selectedLatLng[1], description, date: new Date().toISOString() };
+    saveLocalReport(newReport);
+    // Fechar modal imediatamente
+    reportModal.classList.add('hidden');
+    // Mostrar overlay central animado
+    showCentralSuccess('Problema reportado com sucesso!', () => {
+      // Após animação, dar zoom e adicionar marcador
+      map.setView(selectedLatLng, 17, { animate: true, duration: 1.2 });
+      // Adicionar novo marcador
+      addNewReportMarker(newReport);
+    });
+  });
+}
+
+// Overlay central de sucesso
+function showCentralSuccess(msg, cb) {
+  let overlay = document.createElement('div');
+  overlay.className = 'central-success-overlay visible';
+  overlay.innerHTML = `<div class='central-success-content'><i class='fas fa-check-circle'></i><span>${msg}</span></div>`;
+  document.body.appendChild(overlay);
+  setTimeout(() => {
+    overlay.classList.remove('visible');
+    setTimeout(() => {
+      overlay.remove();
+      if (cb) cb();
+    }, 600);
+  }, 1600);
+}
+
+// Animação da navbar: diminui ao tirar o mouse, volta ao passar o mouse
+const navbar = document.querySelector('.navbar');
+if (navbar) {
+  navbar.addEventListener('mouseleave', () => {
+    navbar.classList.add('shrink');
+  });
+  navbar.addEventListener('mouseenter', () => {
+    navbar.classList.remove('shrink');
+  });
+} 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Via Verde - Lumen Via</title>
+  <title>Lumen Via - Lumen Via</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/styles-common.css">
   <link rel="stylesheet" href="styles/via-verde.css">
@@ -26,8 +26,7 @@
     
     <div class="nav-links">
       <a href="index.html" class="active"><i class="fas fa-home"></i></a>
-      <a href="via-verde.html">Via Verde</a>
-      <a href="via-report.html">Via Report</a>
+      <a href="lumen-via.html">Lumen Via</a>
       <a href="via-quiz.html">Via Quiz</a>
     </div>
   </div>
@@ -35,7 +34,7 @@
   <div class="app-container">
     <section id="via-verde" class="hero-section">
       <div class="hero-content">
-        <h1 class="hero-title">Via Verde: Rotas <span class="highlight">sustentáveis</span> para entregadores</h1>
+        <h1 class="hero-title">Lumen Via: Rotas <span class="highlight">sustentáveis</span> para entregadores</h1>
         <p class="hero-subtitle">Calcule rotas otimizadas que priorizam vias mais seguras e eficientes, contribuindo para uma mobilidade mais sustentável</p>
         <div class="input-section">
           <div class="input-group">
@@ -99,11 +98,47 @@
           </div>
         </div>
         <div id="route-success" class="route-success hidden">Desvio feito com sucesso!</div>
+        <!-- Sistema de reporte de problemas -->
+        <button id="open-report-modal" class="fab-report-btn" title="Reportar problema"><i class="fas fa-plus"></i></button>
       </div>
     </section>
+    <!-- Modal de reporte -->
+    <div id="report-modal" class="report-modal hidden">
+      <div class="report-modal-content">
+        <button id="close-report-modal" class="close-modal-btn"><i class="fas fa-times"></i></button>
+        <h2>Reportar Problema</h2>
+        <form id="report-form">
+          <div class="form-group">
+            <label for="report-type">Tipo de problema</label>
+            <div class="report-type-list">
+              <label><input type="radio" name="report-type" value="poste" required><i class="fas fa-lightbulb"></i> Poste</label>
+              <label><input type="radio" name="report-type" value="buraco"><i class="fas fa-road"></i> Buraco</label>
+              <label><input type="radio" name="report-type" value="policial"><i class="fas fa-user-shield"></i> Policial</label>
+              <label><input type="radio" name="report-type" value="acidente"><i class="fas fa-car-crash"></i> Acidente</label>
+              <label><input type="radio" name="report-type" value="semaforo"><i class="fas fa-traffic-light"></i> Semáforo</label>
+              <label><input type="radio" name="report-type" value="crime"><i class="fas fa-exclamation-triangle"></i> Crime</label>
+              <label><input type="radio" name="report-type" value="pouca_luz"><i class="fas fa-moon"></i> Pouca luz</label>
+              <label><input type="radio" name="report-type" value="sem_energia"><i class="fas fa-bolt"></i> Sem energia</label>
+              <label><input type="radio" name="report-type" value="periculosidade"><i class="fas fa-skull-crossbones"></i> Periculosidade</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="report-description">Descrição</label>
+            <textarea id="report-description" name="report-description" rows="2" maxlength="120" placeholder="Descreva o problema..."></textarea>
+          </div>
+          <div class="form-group location-group" id="report-location-group">
+            <label>Localização</label>
+            <span class="location-icon"><i class="fas fa-location-dot"></i></span>
+            <input type="text" id="report-location" name="report-location" placeholder="Clique no mapa ou use sua localização" readonly>
+            <button type="button" id="use-my-location" class="location-btn"><i class="fas fa-location-arrow"></i> Usar minha localização</button>
+          </div>
+          <button type="submit" class="submit-report-btn">Enviar Reporte</button>
+        </form>
+      </div>
+    </div>
   </div>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <script src="scripts/via-verde.js"></script>
+  <script src="scripts/lumen-via.js"></script>
   <script src="./functions/navbar.js"></script>
 </body>
 </html> 

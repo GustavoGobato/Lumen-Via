@@ -60,7 +60,7 @@ const globalProblems = [
   // Acre - Rio Branco
   { type: 'buraco', lat: -9.97499, lng: -67.8243, description: 'Buraco na Av. Ceará, Rio Branco, AC' },
   { type: 'poste', lat: -9.9765, lng: -67.8221, description: 'Poste quebrado no Centro, Rio Branco, AC' },
-  { type: 'policial', lat: -9.9782, lng: -67.8106, description: 'Blitz policial na Via Verde, Rio Branco, AC' },
+  { type: 'policial', lat: -9.9782, lng: -67.8106, description: 'Blitz policial na Lumen Via, Rio Branco, AC' },
   { type: 'acidente', lat: -9.9700, lng: -67.8360, description: 'Acidente na Estrada do Calafate, Rio Branco, AC' },
   // Alagoas - Maceió
   { type: 'buraco', lat: -9.6658, lng: -35.7350, description: 'Buraco na Ponta Verde, Maceió, AL' },
