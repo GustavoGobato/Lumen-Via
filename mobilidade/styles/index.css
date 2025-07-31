@@ -1,3 +1,5 @@
+@import url(animations.css);
+
 .hero {
   position: relative;
   min-height: calc(100vh - 80px);

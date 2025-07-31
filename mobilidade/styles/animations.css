@@ -1,0 +1,61 @@
+/* animations.css - Estilos para as animações automáticas */
+
+/* Efeito de entrada para o hero */
+.animations-enabled .hero {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animations-enabled .hero.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Efeito parallax suave no background */
+.animations-enabled .hero::before {
+  transition: background-position 1.2s ease-out;
+}
+
+/* Animações para os cards */
+.animations-enabled .solucao-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 
+    opacity 0.6s ease-out var(--animation-delay, 0s),
+    transform 0.6s ease-out var(--animation-delay, 0s),
+    box-shadow 0.3s ease,
+    border 0.3s ease;
+}
+
+.animations-enabled .solucao-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animação para o título das soluções */
+.animations-enabled .solucoes-content h2 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animations-enabled .solucoes-content h2.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Micro-interações para hover */
+.animations-enabled .solucao-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* Respeita preferência por redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  .animations-enabled * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
