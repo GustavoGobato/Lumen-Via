@@ -1,32 +1,59 @@
-# Lumen Via - Soluções Inteligentes para Cidades
+# 🌿 Lumen Via - Soluções Inteligentes para Cidades Sustentáveis
 
-O Lumen Via é um projeto inovador que combina tecnologia sustentável e mobilidade urbana para criar cidades mais inteligentes e eficientes.
+Lumen Via é uma plataforma inovadora que integra tecnologia e sustentabilidade para transformar a mobilidade urbana. Nosso objetivo é tornar as rotas mais verdes, seguras e conscientes, ajudando entregadores e cidadãos a escolherem caminhos inteligentes e ambientalmente responsáveis.
 
-## Funcionalidades Principais
+---
 
-- **Via Verde**: Sistema de roteirização otimizada para entregadores
-- **Postes Solares**: Iluminação pública autossustentável
-- **Semáforos Inteligentes**: Sistema de geração de energia piezoelétrica
-- **Manutenção Inteligente**: Sistema de reporte e monitoramento
+## 🚀 Funcionalidades Principais
 
-## Tecnologias Utilizadas
+- 🌱 **Cálculo de Rota Sustentável**  
+  Encontre o caminho mais eficiente e ecológico para suas entregas, minimizando impactos ambientais e economizando energia.
 
-- HTML5
-- CSS3
-- JavaScript
-- Leaflet.js (para mapas)
-- OpenRouteService API (para cálculo de rotas)
+- 🛠️ **Detecção Automática de Problemas na Rota**  
+  Sistema inteligente que identifica obstáculos, buracos ou outros impedimentos nas rotas em tempo real.
 
-## Como Usar
+- 📝 **Reporte Fácil de Problemas**  
+  Permita que os usuários registrem e enviem ocorrências encontradas no trajeto para que possam ser corrigidas rapidamente.
 
-1. Clone o repositório
-2. Abra o arquivo `index.html` em seu navegador
-3. Para usar o Via Verde, clique no botão correspondente na página inicial
+- 🎯 **Quiz Conscientizador**  
+  Um quiz interativo para promover a consciência ambiental e incentivar práticas sustentáveis entre os usuários.
 
-## Contribuição
+---
 
-Contribuições são bem-vindas! Por favor, leia as diretrizes de contribuição antes de enviar um pull request.
+## 💻 Tecnologias Utilizadas
 
-## Licença
+- HTML5 & CSS3  
+- JavaScript  
+- [Leaflet.js](https://leafletjs.com/) (Mapas interativos)  
+- OpenRouteService API (Cálculo de rotas)  
+
+---
+
+## ⏳ Como Usar
+
+O site estará disponível em breve via hospedagem oficial!  
+Enquanto isso, continue nos acompanhando para atualizações e lançamento.
+
+---
+
+## 🤝 Contribuição
+
+Contribuições são super bem-vindas!  
+Por favor, leia as diretrizes no arquivo CONTRIBUTING.md antes de enviar um pull request.
+
+---
+
+## 📄 Licença
 
 Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para mais detalhes.
+
+---
+
+## 📬 Contato
+
+Para dúvidas, sugestões ou parcerias, entre em contato:  
+✉️ contatogobato@gmail.com
+
+---
+
+🌟 Vamos juntos construir cidades mais inteligentes, sustentáveis e conectadas!  
