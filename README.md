@@ -37,9 +37,7 @@ https://lumen-via.vercel.app
 
 ## 🤝 Contribuição
 
-Contribuições são super bem-vindas!  
-Por favor, leia as diretrizes no arquivo CONTRIBUTING.md antes de enviar um pull request.
-
+Contribuições são super bem-vindas!
 ---
 
 ## 📄 Licença
