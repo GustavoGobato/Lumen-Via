@@ -31,8 +31,7 @@ Lumen Via é uma plataforma inovadora que integra tecnologia e sustentabilidade 
 
 ## ⏳ Como Usar
 
-O site estará disponível em breve via hospedagem oficial!  
-Enquanto isso, continue nos acompanhando para atualizações e lançamento.
+https://lumen-via.vercel.app
 
 ---
 
