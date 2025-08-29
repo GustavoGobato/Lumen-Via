@@ -1,45 +1,45 @@
-// via-quiz.js - Quiz profissional de Mobilidade Sustentável
+
 
 document.addEventListener('DOMContentLoaded', function() {
-    // =============================================
-    // Configurações do Quiz
-    // =============================================
+    
+    
+    
     const quizSettings = {
-    totalQuestions: 15, // Corresponde ao número de perguntas
+    totalQuestions: 15, 
     pointsPerQuestion: 10,
     passingScore: 70
 };
 
-    // =============================================
-    // Elementos do DOM
-    // =============================================
+    
+    
+    
     const DOM = {
-        // Containers
+        
         introScreen: document.getElementById('via-quiz-intro'),
         questionsScreen: document.getElementById('via-quiz-questions'),
         feedbackScreen: document.getElementById('via-quiz-feedback'),
         resultsScreen: document.getElementById('via-quiz-results'),
         
-        // Elementos de controle
+        
         startButton: document.getElementById('via-quiz-start'),
         nextButton: document.getElementById('via-quiz-next'),
         restartButton: document.getElementById('via-quiz-restart'),
         shareButton: document.getElementById('via-quiz-share'),
         
-        // Elementos de progresso
+        
         progressBar: document.getElementById('via-quiz-progress-bar'),
         progressText: document.getElementById('via-quiz-progress-text'),
         scoreDisplay: document.getElementById('via-quiz-score'),
         
-        // Elementos de perguntas
+        
         questionText: document.getElementById('via-quiz-question'),
         optionsContainer: document.getElementById('via-quiz-options'),
         
-        // Elementos de feedback
+        
         feedbackIcon: document.getElementById('via-quiz-feedback-icon'),
         feedbackText: document.getElementById('via-quiz-feedback-text'),
         
-        // Elementos de resultados
+        
         finalScore: document.getElementById('via-quiz-final-score'),
         resultMessage: document.getElementById('via-quiz-result-message'),
         correctAnswers: document.getElementById('via-quiz-correct-answers'),
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
         circleProgress: document.getElementById('via-quiz-circle-progress')
     };
 
-    // =============================================
-    // Estado do Quiz
-    // =============================================
+    
+    
+    
     const quizState = {
         currentQuestion: 0,
         score: 0,
@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
         quizCompleted: false
     };
 
-    // =============================================
-    // Banco de Perguntas
-    // =============================================
+    
+    
+    
     const questions = [
     {
         question: "Qual destes meios de transporte é considerado o mais sustentável para distâncias curtas?",
@@ -228,95 +228,95 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 ];
 
-    // =============================================
-    // Inicialização do Quiz
-    // =============================================
+    
+    
+    
     function initQuiz() {
-        // Verifica se há perguntas suficientes
+        
         if (questions.length < quizSettings.totalQuestions) {
             console.error(`Necessário ${quizSettings.totalQuestions} perguntas. Atualmente há apenas ${questions.length}.`);
             return;
         }
 
-        // Configura event listeners
+        
         setupEventListeners();
         
-        // Mostra a tela inicial
+        
         showScreen(DOM.introScreen);
     }
 
-    // =============================================
-    // Configuração dos Event Listeners
-    // =============================================
+    
+    
+    
     function setupEventListeners() {
-        // Botão Iniciar
+        
         DOM.startButton.addEventListener('click', startQuiz);
         
-        // Botão Próxima Pergunta
+        
         DOM.nextButton.addEventListener('click', loadNextQuestion);
         
-        // Botão Reiniciar
+        
         DOM.restartButton.addEventListener('click', restartQuiz);
         
-        // Botão Compartilhar
+        
         DOM.shareButton.addEventListener('click', shareResults);
     }
 
-    // =============================================
-    // Controle de Telas
-    // =============================================
+    
+    
+    
     function showScreen(screenElement) {
-        // Esconde todas as telas
+        
         DOM.introScreen.classList.add('via-quiz-hidden');
         DOM.questionsScreen.classList.add('via-quiz-hidden');
         DOM.resultsScreen.classList.add('via-quiz-hidden');
         
-        // Mostra a tela solicitada
+        
         screenElement.classList.remove('via-quiz-hidden');
     }
 
-    // =============================================
-    // Iniciar Quiz
-    // =============================================
+    
+    
+    
     function startQuiz() {
-        // Reinicia o estado do quiz
+        
         quizState.currentQuestion = 0;
         quizState.score = 0;
         quizState.quizCompleted = false;
         
-        // Atualiza a exibição da pontuação
+        
         updateScoreDisplay();
         
-        // Mostra a tela de perguntas
+        
         showScreen(DOM.questionsScreen);
         
-        // Carrega a primeira pergunta
+        
         loadQuestion();
     }
 
-    // =============================================
-    // Carregar Pergunta
-    // =============================================
+    
+    
+    
     function loadQuestion() {
-        // Verifica se o quiz terminou
+        
         if (quizState.currentQuestion >= quizSettings.totalQuestions) {
             showResults();
             return;
         }
 
-        // Obtém a pergunta atual
+        
         const question = questions[quizState.currentQuestion];
         
-        // Atualiza o texto da pergunta
+        
         DOM.questionText.textContent = question.question;
         
-        // Limpa as opções anteriores
+        
         DOM.optionsContainer.innerHTML = '';
         
-        // Atualiza a barra de progresso
+        
         updateProgress();
         
-        // Adiciona as opções de resposta
+        
         question.options.forEach((option, index) => {
             const optionElement = document.createElement('button');
             optionElement.className = 'via-quiz-option';
@@ -328,22 +328,22 @@ document.addEventListener('DOMContentLoaded', function() {
             DOM.optionsContainer.appendChild(optionElement);
         });
         
-        // Esconde o feedback
+        
         DOM.feedbackScreen.classList.add('via-quiz-hidden');
     }
 
-    // =============================================
-    // Selecionar Opção
-    // =============================================
+    
+    
+    
     function selectOption(selectedIndex) {
-        // Impede múltiplas seleções
+        
         if (quizState.selectedOption !== null) return;
         
         quizState.selectedOption = selectedIndex;
         const question = questions[quizState.currentQuestion];
         const optionElements = document.querySelectorAll('.via-quiz-option');
         
-        // Marca a opção selecionada como correta ou incorreta
+        
         optionElements.forEach((option, index) => {
             option.disabled = true;
             
@@ -354,47 +354,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Verifica se a resposta está correta
+        
         const isCorrect = selectedIndex === question.answer;
         
-        // Atualiza a pontuação
+        
         if (isCorrect) {
             quizState.score += quizSettings.pointsPerQuestion;
             updateScoreDisplay();
         }
         
-        // Mostra o feedback
+        
         showFeedback(isCorrect, question.explanation);
     }
 
-    // =============================================
-    // Mostrar Feedback
-    // =============================================
+    
+    
+    
     function showFeedback(isCorrect, explanation) {
-        // Configura o ícone e o texto de feedback
+        
         DOM.feedbackIcon.className = isCorrect ? 'fas fa-check-circle' : 'fas fa-times-circle';
         DOM.feedbackText.textContent = isCorrect 
             ? `✅ Correto! ${explanation}` 
             : `❌ Incorreto. ${explanation}`;
         
-        // Mostra o feedback
+        
         DOM.feedbackScreen.classList.remove('via-quiz-hidden');
         
-        // Rola a tela para o feedback
+        
         DOM.feedbackScreen.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // =============================================
-    // Carregar Próxima Pergunta
-    // =============================================
+    
+    
+    
     function loadNextQuestion() {
-        // Reseta a seleção
+        
         quizState.selectedOption = null;
         
-        // Avança para a próxima pergunta
+        
         quizState.currentQuestion++;
         
-        // Carrega a próxima pergunta ou mostra os resultados
+        
         if (quizState.currentQuestion < quizSettings.totalQuestions) {
             loadQuestion();
         } else {
@@ -402,50 +402,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // =============================================
-    // Atualizar Progresso
-    // =============================================
+    
+    
+    
     function updateProgress() {
-        // Calcula o progresso
+        
         const progressPercent = ((quizState.currentQuestion + 1) / quizSettings.totalQuestions) * 100;
         
-        // Atualiza a barra de progresso
+        
         DOM.progressBar.style.width = `${progressPercent}%`;
         DOM.progressText.textContent = `${quizState.currentQuestion + 1}/${quizSettings.totalQuestions}`;
     }
 
-    // =============================================
-    // Atualizar Pontuação
-    // =============================================
+    
+    
+    
     function updateScoreDisplay() {
         DOM.scoreDisplay.textContent = quizState.score;
     }
 
-    // =============================================
-    // Mostrar Resultados
-    // =============================================
+    
+    
+    
     function showResults() {
-        // Calcula a porcentagem de acertos
+        
         const percentage = Math.round((quizState.score / (quizSettings.totalQuestions * quizSettings.pointsPerQuestion)) * 100);
         
-        // Atualiza o display de resultados
+        
         DOM.finalScore.textContent = percentage;
         DOM.correctAnswers.textContent = Math.floor(quizState.score / quizSettings.pointsPerQuestion);
         DOM.wrongAnswers.textContent = quizSettings.totalQuestions - Math.floor(quizState.score / quizSettings.pointsPerQuestion);
         
-        // Atualiza a mensagem de resultado
+        
         setResultMessage(percentage);
         
-        // Anima o círculo de progresso
+        
         animateCircleProgress(percentage);
         
-        // Mostra a tela de resultados
+        
         showScreen(DOM.resultsScreen);
     }
 
-    // =============================================
-    // Definir Mensagem de Resultado
-    // =============================================
+    
+    
+    
     function setResultMessage(percentage) {
         let message, emoji;
         
@@ -466,12 +466,12 @@ document.addEventListener('DOMContentLoaded', function() {
         DOM.resultMessage.textContent = `${emoji} ${message}`;
     }
 
-    // =============================================
-    // Animar Círculo de Progresso
-    // =============================================
+    
+    
+    
     function animateCircleProgress(targetPercentage) {
         let currentPercentage = 0;
-        const animationDuration = 1500; // 1.5 segundos
+        const animationDuration = 1500; 
         const steps = 60;
         const increment = targetPercentage / steps;
         const interval = animationDuration / steps;
@@ -488,29 +488,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }, interval);
     }
 
-    // =============================================
-    // Reiniciar Quiz
-    // =============================================
+    
+    
+    
     function restartQuiz() {
-        // Reinicia o estado do quiz
+        
         quizState.currentQuestion = 0;
         quizState.score = 0;
         quizState.quizCompleted = false;
         
-        // Mostra a tela inicial
+        
         showScreen(DOM.introScreen);
     }
 
-    // =============================================
-    // Compartilhar Resultados
-    // =============================================
+    
+    
+    
     function shareResults() {
         const correct = Math.floor(quizState.score / quizSettings.pointsPerQuestion);
         const percentage = Math.round((quizState.score / (quizSettings.totalQuestions * quizSettings.pointsPerQuestion)) * 100);
         
         const shareText = `Acabei de fazer ${correct} acertos (${percentage}%) no Quiz de Mobilidade Sustentável da Lumen Via! 🚲🌱 Teste seus conhecimentos também: ${window.location.href}`;
         
-        // Verifica se a API de compartilhamento está disponível
+        
         if (navigator.share) {
             navigator.share({
                 title: 'Quiz de Mobilidade Sustentável',
@@ -525,21 +525,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // =============================================
-    // Fallback para Compartilhamento
-    // =============================================
+    
+    
+    
     function fallbackShare(shareText) {
-        // Tenta copiar para a área de transferência
+        
         navigator.clipboard.writeText(shareText).then(() => {
             alert('Resultados copiados para a área de transferência! Cole nas suas redes sociais.');
         }).catch(err => {
-            // Fallback para o método antigo
+            
             prompt('Copie o texto abaixo para compartilhar seus resultados:', shareText);
         });
     }
 
-    // =============================================
-    // Inicializa o Quiz quando o DOM estiver pronto
-    // =============================================
+    
+    
+    
     initQuiz();
 });
