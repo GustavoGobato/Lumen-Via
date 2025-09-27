@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impacto Solar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles-common.css">
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles/placaSolar.css">
+  <link rel="shortcut icon" href="styles/assets/image.png" type="image/x-icon">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <span class="logo-box">L</span>
+        <span class="logo-text">LUMEN VIA</span>
+      </a>
+
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i></a>
+
+        <a href="placaSolar.html" class="active">Impacto Solar</a>
+        <a href="impacto.html">Cidade Mais limpa</a>
+        <a href="via-quiz.html">Via Quiz</a>
+
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero-solar">
+      <div class="hero-content">
+        <h1>Energia <span>Solar</span> & Piezoelétrica</h1>
+        <p>Descubra como estas tecnologias revolucionárias estão transformando a geração de energia limpa e sustentável
+          para as cidades do futuro.</p>
+      </div>
+    </section>
+
+
+    <section class="content-section">
+      <div class="solar-section">
+        <div class="section-header">
+          <h2>Energia Solar Fotovoltaica</h2>
+          <p>Transformando a luz do sol em eletricidade limpa e renovável</p>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="card-img">
+              <img
+                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1772&q=80"
+                alt="Placas Solares">
+            </div>
+            <div class="card-content">
+              <h3><i class="fas fa-sun"></i> Como Funciona</h3>
+              <p>As placas solares fotovoltaicas convertem diretamente a luz solar em eletricidade através do efeito
+                fotovoltaico, onde fótons da luz solar excitam elétrons em materiais semicondutores, gerando corrente
+                elétrica.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="card-img">
+              <img
+                src="https://images.unsplash.com/photo-1625472603517-1b0dc72846ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+                alt="Vantagens da Energia Solar">
+            </div>
+            <div class="card-content">
+              <h3><i class="fas fa-bolt"></i> Vantagens</h3>
+              <p>Energia renovável e inesgotável, redução de custos com eletricidade, baixa manutenção, vida útil longa
+                (25+ anos), valorização do imóvel e contribuição para a sustentabilidade ambiental.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="card-img">
+              <img
+                src="https://images.unsplash.com/photo-1642784353779-8f9a170f5c6b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+                alt="Aplicações da Energia Solar">
+            </div>
+            <div class="card-content">
+              <h3><i class="fas fa-solar-panel"></i> Aplicações</h3>
+              <p>Residências, comércios, indústrias, iluminação pública, sistemas de bombeamento de água, carregadores
+                veiculares, e até naves espaciais. A energia solar pode ser aplicada em praticamente qualquer contexto
+                que necessite de energia elétrica.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="piezo-section">
+        <div class="section-header">
+          <h2>Tecnologia Piezoelétrica</h2>
+          <p>Convertendo pressão e movimento em energia elétrica</p>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="card-img">
+              <img
+                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+                alt="Sensores Piezoelétricos">
+            </div>
+            <div class="card-content">
+              <h3><i class="fas fa-walking"></i> Princípio de Funcionamento</h3>
+              <p>Materiais piezoelétricos geram uma tensão elétrica quando submetidos a pressão mecânica. Este fenômeno
+                permite capturar energia de movimentos, vibrações ou pressões que normalmente seriam desperdiçadas.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="card-img">
+              <img
+                src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+                alt="Aplicações Piezoelétricas">
+            </div>
+            <div class="card-content">
+              <h3><i class="fas fa-road"></i> Aplicações Urbanas</h3>
+              <p>Pisos geradores em calçadas movimentadas, estradas que capturam energia do tráfego, estações de metrô,
+                academias ao ar livre e até em campos esportivos. Qualquer local com movimento constante pode se tornar
+                uma fonte de energia.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="card-img">
+              <img
+                src="https://images.unsplash.com/photo-1569163139394-de44aa9a21bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+                alt="Vantagens Piezoelétricas">
+            </div>
+            <div class="card-content">
+              <h3><i class="fas fa-leaf"></i> Sustentabilidade</h3>
+              <p>Gera energia a partir de movimentos já existentes, não requer luz solar ou vento, funciona em ambientes
+                internos e externos, baixa manutenção e longa vida útil. Ideal para complementar outras fontes
+                renováveis.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tech-comparison">
+      <div class="comparison-content">
+        <div class="section-header">
+          <h2>Comparativo das Tecnologias</h2>
+          <p>Duas abordagens complementares para geração de energia limpa</p>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="comparison-item">
+            <h3><i class="fas fa-sun"></i> Energia Solar</h3>
+            <ul>
+              <li>Geração durante o dia (com pico ao meio-dia)</li>
+              <li>Eficiência de 15-22% em painéis comerciais</li>
+              <li>Requer superfícies expostas ao sol</li>
+              <li>Melhor para áreas com alta insolação</li>
+              <li>Vida útil: 25+ anos</li>
+              <li>Aplicável em telhados, terrenos e grandes usinas</li>
+            </ul>
+          </div>
+
+          <div class="comparison-item">
+            <h3><i class="fas fa-shoe-prints"></i> Piezoelétrica</h3>
+            <ul>
+              <li>Geração contínua com movimento/pressão</li>
+              <li>Eficiência de 10-20% na conversão mecânica-elétrica</li>
+              <li>Funciona em ambientes internos e externos</li>
+              <li>Melhor para áreas de alto tráfego</li>
+              <li>Vida útil: 10+ anos (depende do uso)</li>
+              <li>Aplicável em pisos, calçadas e estradas</li>
+            </ul>
+          </div>
+
+          <div class="comparison-item">
+            <h3><i class="fas fa-handshake"></i> Combinação Ideal</h3>
+            <ul>
+              <li>Sistemas solares para geração principal diurna</li>
+              <li>Sistemas piezoelétricos para complementar à noite</li>
+              <li>Redução da dependência da rede convencional</li>
+              <li>Maximização do aproveitamento de recursos disponíveis</li>
+              <li>Solução completa para smart cities</li>
+              <li>Retorno financeiro e ambiental otimizado</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="infographic">
+      <div class="infographic-container">
+        <div class="infographic-title">
+          <h2>Como Integramos Estas Tecnologias</h2>
+          <p>A Lumen Via desenvolve soluções inovadoras que combinam ambas as tecnologias</p>
+        </div>
+
+        <div class="infographic-grid">
+          <div class="infographic-item">
+            <div class="infographic-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h4>Iluminação Autônoma</h4>
+            <p>Postes de luz que utilizam energia solar durante o dia e piezoelétrica à noite com o movimento de
+              pedestres.</p>
+          </div>
+
+          <div class="infographic-item">
+            <div class="infographic-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h4>Pontos de Recarga</h4>
+            <p>Estações de recarga para dispositivos móveis em praças públicas, alimentadas pelo movimento de pessoas.
+            </p>
+          </div>
+
+          <div class="infographic-item">
+            <div class="infographic-icon">
+              <i class="fas fa-bus"></i>
+            </div>
+            <h4>Paradas Inteligentes</h4>
+            <p>Abribus com iluminação e informações em tempo real, alimentadas por energia solar e pelo movimento dos
+              usuários.</p>
+          </div>
+
+          <div class="infographic-item">
+            <div class="infographic-icon">
+              <i class="fas fa-charging-station"></i>
+            </div>
+            <h4>Eletropostos</h4>
+            <p>Estações de carregamento para veículos elétricos com geração própria de energia renovável.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="section-header">
+          <h2>Impacto Real</h2>
+          <p>Números que comprovam a eficiência das nossas soluções</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number" data-count="75">0</div>
+            <div class="stat-label">Redução de Custos</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-number" data-count="280">0</div>
+            <div class="stat-label">Toneladas de CO² Evitadas</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-number" data-count="1200">0</div>
+            <div class="stat-label">MWh Gerados</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-number" data-count="98">0</div>
+            <div class="stat-label">Satisfação dos Clientes</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Lumen Via</h3>
+        <p>Transformando cidades com tecnologia sustentável</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contato</h3>
+        <p><i class="fas fa-envelope"></i> contatogobato@gmail.com</p>
+        <p><i class="fas fa-phone"></i> (11) 91263-4148</p>
+      </div>
+      <div class="footer-section">
+        <h3>Redes Sociais</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/_inovatechh/" target="_blank" class="social-link">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Lumen Via. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+<script src="scripts/placaSolar/counter-animation.js"></script>
+<script src="scripts/placaSolar/main.js"></script>
+<script src="scripts/placaSolar/observer-config.js"></script>
+<script src="scripts/placaSolar/scroll-animation.js"></script>
+     <script src="./functions/navbar.js"></script>
+</body>
+
+</html>

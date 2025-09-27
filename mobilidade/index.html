@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,28 +14,31 @@
   <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="shortcut icon" href="styles/assets/image.png" type="image/x-icon">
 </head>
+
 <body>
   <nav class="navbar">
-  <div class="nav-content">
-    <a href="index.html" class="logo">
-      <span class="logo-box">L</span>
-      <span class="logo-text">LUMEN VIA</span>
-    </a>
-    
-    <div class="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <span class="logo-box">L</span>
+        <span class="logo-text">LUMEN VIA</span>
+      </a>
+
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="nav-links">
+        <a href="index.html" class="active"><i class="fas fa-home"></i></a>
+        <a href="placaSolar.html">Impacto Solar</a>
+        <a href="impacto.html" >Cidade Mais limpa</a>
+        <a href="via-quiz.html">Via Quiz</a>
+      </div>
     </div>
-    
-    <div class="nav-links">
-      <a href="index.html" class="active"><i class="fas fa-home"></i></a>
-      <a href="lumen-via.html">Lumen Via</a>
-      <a href="via-quiz.html">Via Quiz</a>
-    </div>
-  </div>
-</nav>
+  </nav>
 
   <section id="inicio" class="hero">
     <div class="hero-content">
@@ -43,41 +47,41 @@
     </div>
   </section>
 
-  <!-- Soluções Section -->
+
   <section id="solucoes" class="solucoes">
     <div class="solucoes-content">
       <h2>Nossas Soluções</h2>
       <div class="solucoes-grid">
-        <div class="solucao-card" >
+        <div class="solucao-card">
           <div class="solucao-icon">
             <i class="fas fa-route"></i>
           </div>
           <h3>Lumen Via</h3>
-          <p>Algoritmo que calcula as melhores rotas para equipes de manutenção e entregadores, otimizando tempo, recursos e reduzindo custos operacionais e emissões de CO₂.</p>
+          <p>Algoritmo que calcula as melhores rotas para equipes de manutenção e entregadores, otimizando tempo,
+            recursos e reduzindo custos operacionais e emissões de CO₂.</p>
         </div>
         <div class="solucao-card">
           <div class="solucao-icon">
-            <i class="fas fa-tools"></i>
+            <i class="fas fa-hand"></i>
           </div>
-          <h3>Via Report</h3>
-          <p>Plataforma para reportar postes e semáforos quebrados. Aciona automaticamente a equipe de manutenção, garantindo resposta rápida e monitoramento contínuo.</p>
+          <h3>Mobilidade é Respeito</h3>
+          <p>Na Lumen Via, compreendemos que mobilidade sustentável vai além do simples deslocamento - é uma forma de respeito coletivo. </p>
         </div>
-        
+
         <div class="solucao-card">
           <div class="solucao-icon">
             <i class="fas fa-question-circle"></i>
           </div>
           <h3>Via Quiz</h3>
-          <p>Quiz interativo que testa o conhecimento dos usuários sobre mobilidade sustentável, oferecendo dicas práticas e informações sobre como reduzir a pegada de carbono no dia a dia, incentivando hábitos mais ecológicos na cidade.</p>
+          <p>Quiz interativo que testa o conhecimento dos usuários sobre mobilidade sustentável, oferecendo dicas
+            práticas e informações sobre como reduzir a pegada de carbono no dia a dia, incentivando hábitos mais
+            ecológicos na cidade.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Gradiente de transição para Lumen Via -->
   <div class="gradient-divider gradient-verde"></div>
-
-  <!-- As seções Lumen Via e Via Report foram movidas para páginas separadas -->
 
   <footer>
     <div class="footer-content">
@@ -107,7 +111,8 @@
 
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="scripts/script.js"></script>
-  <script src="scripts/animations.js"></script> 
+  <script src="scripts/animations.js"></script>
   <script src="./functions/navbar.js"></script>
 </body>
+
 </html>

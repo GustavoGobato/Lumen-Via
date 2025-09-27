@@ -6,11 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     this.classList.toggle('active');
     navLinks.classList.toggle('active');
     
-    // Impede a rolagem do corpo quando o menu está aberto
     document.body.style.overflow = this.classList.contains('active') ? 'hidden' : '';
   });
   
-  // Fechar o menu quando um link for clicado
   const navItems = document.querySelectorAll('.nav-links a');
   navItems.forEach(item => {
     item.addEventListener('click', function() {

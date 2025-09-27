@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Energia Sustentável | Lumen Via</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles/impacto.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">
+                <span class="logo-box">L</span>
+                <span class="logo-text">LUMEN VIA</span>
+            </a>
+
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i></a>
+                <a href="placaSolar.html">Impacto Solar</a>
+                <a href="impacto.html" class="active">Cidade Mais limpa</a>
+                <a href="via-quiz.html">Via Quiz</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="calculator-hero">
+        <div class="calculator-hero-content">
+            <h1>Calculadora de <span>Energia Sustentável</span></h1>
+            <p>Descubra o impacto positivo da energia piezoelétrica e solar no meio ambiente e na economia</p>
+        </div>
+    </section>
+
+    <div class="calculator-container">
+        <div class="calculator-grid">
+            <div class="calculator-inputs">
+                <h2><i class="fas fa-sliders-h"></i> Configure sua Cidade</h2>
+
+                <div class="input-group">
+                    <label for="population">População da Cidade</label>
+                    <div class="slider-container">
+                        <input type="range" min="10000" max="1000000" value="150000" class="slider" id="population">
+                        <span class="slider-value" id="population-value">150.000</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="solar-panels">Painéis Solares Instalados (m²)</label>
+                    <div class="slider-container">
+                        <input type="range" min="100" max="10000" value="1500" class="slider" id="solar-panels">
+                        <span class="slider-value" id="solar-value">1.500 m²</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="piezo-area">Área com Piezoelétricos (m²)</label>
+                    <div class="slider-container">
+                        <input type="range" min="100" max="5000" value="800" class="slider" id="piezo-area">
+                        <span class="slider-value" id="piezo-value">800 m²</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="traffic">Nível de Tráfego/Movimento</label>
+                    <div class="slider-container">
+                        <input type="range" min="1" max="10" value="7" class="slider" id="traffic">
+                        <span class="slider-value" id="traffic-value">7/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h2><i class="fas fa-chart-line"></i> Resultados</h2>
+
+                <div class="result-item">
+                    <div class="result-label">
+                        <i class="fas fa-bolt"></i>
+                        <span>Energia Gerada (kWh/ano)</span>
+                    </div>
+                    <div class="result-value" id="energy-output">0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">
+                        <i class="fas fa-cloud"></i>
+                        <span>Redução de CO₂ (ton/ano)</span>
+                    </div>
+                    <div class="result-value" id="co2-reduction">0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Economia Anual (R$)</span>
+                    </div>
+                    <div class="result-value" id="money-saved">0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">
+                        <i class="fas fa-home"></i>
+                        <span>Casas Abastecidas</span>
+                    </div>
+                    <div class="result-value" id="homes-powered">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="comparison-section">
+        <h2>Comparativo de Tecnologias</h2>
+        <div class="comparison-cards">
+            <div class="comparison-card">
+                <div class="comparison-icon">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h3>Energia Solar</h3>
+                <p>Geração de energia limpa durante o dia</p>
+                <div class="comparison-value" id="solar-comparison">0 kWh</div>
+            </div>
+
+            <div class="comparison-card">
+                <div class="comparison-icon">
+                    <i class="fas fa-walking"></i>
+                </div>
+                <h3>Energia Piezoelétrica</h3>
+                <p>Geração contínua a partir do movimento</p>
+                <div class="comparison-value" id="piezo-comparison">0 kWh</div>
+            </div>
+
+            <div class="comparison-card">
+                <div class="comparison-icon">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3>Energia Convencional</h3>
+                <p>Geração tradicional com alto custo ambiental</p>
+                <div class="comparison-value" id="conventional-comparison">0 kWh</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="visualization-section">
+        <h2>Impacto Ambiental</h2>
+        <div class="co2-visualization">
+            <div class="co2-header">
+                <h3>Emissões de CO₂ Evitadas</h3>
+                <div class="co2-amount" id="co2-amount">0 toneladas</div>
+            </div>
+
+            <div class="co2-bar-container">
+                <div class="co2-bar" id="co2-bar"></div>
+            </div>
+
+            <div class="co2-labels">
+                <span>0</span>
+                <span>Equivalente a plantar <span id="trees-amount">0</span> árvores</span>
+                <span id="co2-max">1000</span>
+            </div>
+
+            <p class="save-planet">Sua cidade está contribuindo para um planeta mais limpo e sustentável!</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Lumen Via</h3>
+                <p>Transformando cidades com tecnologia sustentável</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-envelope"></i> contatogobato@gmail.com</p>
+                <p><i class="fas fa-phone"></i> (11) 91263-4148</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/_inovatechh/" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Lumen Via. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/impacto/calculations.js"></script>
+    <script src="scripts/impacto/event-listener.js"></script>
+    <script src="scripts/impacto/main.js"></script>
+    <script src="scripts/impacto/slider-elements.js"></script>
+    <script src="scripts/impacto/slider-uptade.js"></script>
+
+    <script src="functions/navbar.js"></script>
+
+</body>
+
+</html>
