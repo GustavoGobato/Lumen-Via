@@ -319,7 +319,7 @@
   position: relative;
   font-size: 3rem;
   font-weight: 800;
-  color: var(--dark);
+  color: var(--secondary);
   -webkit-background-clip: text;
 
 }
