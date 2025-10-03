@@ -8,7 +8,7 @@
 
 _Aqui você pode inserir um print da tela inicial do projeto:_  
 
-![Screenshot](./screenshot.png)
+![Screenshot](mobilidade/styles/assets/lumen-via.png)
 
 ---
 
