@@ -319,9 +319,9 @@
   position: relative;
   font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--dark), #e6c200);
+  color: var(--dark);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
 }
 
 #via-quiz-final-score::after {
