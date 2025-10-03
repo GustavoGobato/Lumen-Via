@@ -69,8 +69,15 @@
 }
 
 @keyframes viaQuizFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .via-quiz-card h2 {
@@ -308,14 +315,17 @@
   border-radius: 50%;
 }
 
-.via-quiz-final-score {
+#via-quiz-final-score {
   position: relative;
   font-size: 3rem;
   font-weight: 800;
-  color: var(--primary);
-  background: linear-gradient(135deg, var(--secondary), #e6c200);
+  background: linear-gradient(135deg, var(--dark), #e6c200);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+#via-quiz-final-score::after {
+  content: "%";
 }
 
 .via-quiz-result-details {
@@ -380,24 +390,24 @@
   .via-quiz-container {
     padding: 1.5rem;
   }
-  
+
   .via-quiz-stats {
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .via-quiz-question-text {
     font-size: 1.2rem;
   }
-  
+
   .via-quiz-option {
     padding: 1rem;
   }
-  
+
   .via-quiz-result-actions {
     flex-direction: column;
   }
-  
+
   .via-quiz-restart-btn,
   .via-quiz-share-btn {
     width: 100%;

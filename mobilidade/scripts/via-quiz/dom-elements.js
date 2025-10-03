@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         feedbackIcon: document.getElementById('via-quiz-feedback-icon'),
         feedbackText: document.getElementById('via-quiz-feedback-text'),
         
-        finalScore: document.getElementById('via-quiz-final-score'),
+        finalScore: document.getElementByid('via-quiz-final-score'),
         resultMessage: document.getElementById('via-quiz-result-message'),
         correctAnswers: document.getElementById('via-quiz-correct-answers'),
         wrongAnswers: document.getElementById('via-quiz-wrong-answers'),
