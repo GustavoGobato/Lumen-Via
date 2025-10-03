@@ -50,4 +50,13 @@ Para dúvidas, sugestões ou parcerias:
 
 ---
 
+## 👥 Contribuidores
+[![Arthur Roberto Alves](https://img.shields.io/badge/-Arthur%20Roberto%20Alves-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/arthur-roberto-alves-bb83b0354/)
+[![GitHub](https://img.shields.io/badge/-GitHub-6e5494?style=flat-square&logo=github&logoColor=white)](https://github.com/arthurrobertoalves)
+
+[![Gustavo Gobato 💡](https://img.shields.io/badge/-Gustavo%20Gobato%20💡-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gustavo-gobato-%F0%9F%92%A1-6ab68836b/)
+[![GitHub](https://img.shields.io/badge/-GitHub-6e5494?style=flat-square&logo=github&logoColor=white)](https://github.com/GustavoGobato)
+
+---
+
 🌟 **Lumen Via — cidades mais inteligentes, seguras e sustentáveis.**
