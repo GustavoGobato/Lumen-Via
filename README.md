@@ -1,56 +1,56 @@
-# 🌿 Lumen Via - Soluções Inteligentes para Cidades Sustentáveis
+# 🌿 Lumen Via - Iluminação Inteligente para Cidades do Futuro
 
-Lumen Via é uma plataforma inovadora que integra tecnologia e sustentabilidade para transformar a mobilidade urbana. Nosso objetivo é tornar as rotas mais verdes, seguras e conscientes, ajudando entregadores e cidadãos a escolherem caminhos inteligentes e ambientalmente responsáveis.
+[Lumen Via](https://lumen-via.vercel.app) é uma plataforma inovadora que une **sustentabilidade** e **tecnologia** para transformar a mobilidade urbana e otimizar a manutenção de vias. Nosso foco é reduzir custos, melhorar a eficiência e diminuir as emissões de CO₂ nas cidades.
+
+---
+
+## 🖼️ Pré-visualização
+
+_Aqui você pode inserir um print da tela inicial do projeto:_  
+
+![Screenshot](./screenshot.png)
 
 ---
 
 ## 🚀 Funcionalidades Principais
 
-- 🌱 **Cálculo de Rota Sustentável**  
-  Encontre o caminho mais eficiente e ecológico para suas entregas, minimizando impactos ambientais e economizando energia.
+- ☀️ **Impacto Solar**  
+  Aproveitamento de energia limpa para reduzir impactos ambientais e custos de manutenção.
 
-- 🛠️ **Detecção Automática de Problemas na Rota**  
-  Sistema inteligente que identifica obstáculos, buracos ou outros impedimentos nas rotas em tempo real.
+- 🌱 **Cidade Mais Limpa**  
+  Ferramentas que incentivam práticas sustentáveis no espaço urbano.
 
-- 📝 **Reporte Fácil de Problemas**  
-  Permita que os usuários registrem e enviem ocorrências encontradas no trajeto para que possam ser corrigidas rapidamente.
-
-- 🎯 **Quiz Conscientizador**  
-  Um quiz interativo para promover a consciência ambiental e incentivar práticas sustentáveis entre os usuários.
-
+- 🎯 **Via Quiz**  
+  Um quiz interativo para promover a consciência ambiental e boas práticas de mobilidade.
 ---
 
 ## 💻 Tecnologias Utilizadas
 
-- HTML5 & CSS3  
-- JavaScript  
-- [Leaflet.js](https://leafletjs.com/) (Mapas interativos)  
-- OpenRouteService API (Cálculo de rotas)  
+- HTML5,
+-  CSS3,
+-  JavaScript 
 
 ---
 
 ## ⏳ Como Usar
 
-https://lumen-via.vercel.app
+Acesse o projeto diretamente no navegador:  
+👉 [lumen-via.vercel.app](https://lumen-via.vercel.app)
 
 ---
 
-## 🤝 Contribuição
-
-Contribuições são super bem-vindas!
----
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
 
 ---
 
 ## 📬 Contato
 
-Para dúvidas, sugestões ou parcerias, entre em contato:  
-✉️ contatogobato@gmail.com
+Para dúvidas, sugestões ou parcerias:  
+✉️ contatogobato@gmail.com  
 
 ---
 
-🌟 Vamos juntos construir cidades mais inteligentes, sustentáveis e conectadas!  
+🌟 **Lumen Via — cidades mais inteligentes, seguras e sustentáveis.**
