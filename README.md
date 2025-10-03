@@ -5,9 +5,6 @@
 ---
 
 ## 🖼️ Pré-visualização
-
-_Aqui você pode inserir um print da tela inicial do projeto:_  
-
 ![Screenshot](mobilidade/styles/assets/lumen-via.png)
 
 ---
