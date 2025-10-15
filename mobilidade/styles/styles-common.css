@@ -54,6 +54,10 @@ body {
   transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.navbar img{
+  height: 30px;
+}
+
 .navbar.shrink {
   height: 56px;
   box-shadow: 0 1px 6px rgba(0,0,0,0.08);

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeCEAP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles-common.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="shortcut icon" href="styles/assets/image.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/footer/footer-styles.css">
+    <link rel="stylesheet" href="styles/feceap.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">
+                <span class="logo-box">L</span>
+                <span class="logo-text">LUMEN VIA</span>
+            </a>
+
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i></a>
+                <a href="feceap.html" class="active"><img src="styles/assets/feceap.png" alt=""></a>
+                <a href="placaSolar.html">Impacto Solar</a>
+                <a href="impacto.html">Cidade Mais limpa</a>
+                <a href="via-quiz.html">Via Quiz</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Seção Hero com imagem de fundo -->
+        <section class="hero-feceap">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>FeCEAP <span class="highlight">2025</span></h1>
+                <p>Participe da maior feira de ciências e tecnologia do CEAP</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" id="garantir-ingresso">
+                        <i class="fas fa-ticket-alt"></i>
+                        Garantir Ingresso
+                    </button>
+                    <button class="btn-secondary" id="votar-agora">
+                        <i class="fas fa-vote-yea"></i>
+                        VOTE AGORA
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Sobre o Evento -->
+        <section class="sobre-evento">
+            <div class="container">
+                <h2>Sobre a FeCEAP</h2>
+                <div class="sobre-content">
+                    <div class="sobre-text">
+                        <p>A Feira de Ciências e Tecnologia do CEAP é um evento anual que reúne os melhores projetos
+                            desenvolvidos por nossos alunos. Este ano, temos como tema principal "Mobilidade".
+                        </p>
+                        <div class="evento-info">
+                            <div class="info-item1">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>18 de Outubro de 2024</span>
+                            </div>
+                            <div class="info-item2">
+                                <i class="fas fa-clock"></i>
+                                <span>10:00 - 18:00</span>
+                            </div>
+                            <div class="info-item3" class="info-item2" onclick="maps()">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>CEAP - Centro Educacional(Ir para Maps)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sobre-image">
+                        <img src="styles/assets/64d3abe45c627.jpg" alt="Instituição CEAP">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Projetos em Destaque -->
+        
+        <!-- Seção Programação -->
+        <section class="programacao">
+            <div class="container">
+                <h2>Programação do Evento</h2>
+                <div class="programacao-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">08:00</div>
+                        <div class="timeline-content">
+                            <h4>Abertura Oficial</h4>
+                            <p>Cerimônia de abertura com diretores e convidados especiais</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">09:00</div>
+                        <div class="timeline-content">
+                            <h4>Visitação aos Projetos</h4>
+                            <p>Exposição de todos os projetos participantes</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:00</div>
+                        <div class="timeline-content">
+                            <h4>Palestra: Inovação Sustentável</h4>
+                            <p>Com especialista em tecnologia verde</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">16:00</div>
+                        <div class="timeline-content">
+                            <h4>Premiação</h4>
+                            <p>Anúncio dos projetos vencedores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Galeria -->
+        <section class="galeria">
+            <div class="container">
+                <h2>Galeria de Fotos</h2>
+                <div class="galeria-grid">
+                    <div class="galeria-item">
+                        <img src="styles/assets/premiação foto denovo com confete.jpg" alt="FeCEAP 2023">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="styles/assets/maos sujas.jpg" alt="Projetos anteriores">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="styles/assets/apresentaçao.jpg" alt="Alunos apresentando">
+                    </div>
+                    <div class="galeria-item">
+                        <img src="styles/assets/fortesmaquetes.jpg" alt="Visitação">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Patrocinadores -->
+        <section class="patrocinadores">
+            <div class="container">
+                <h2>Patrocinadores</h2>
+                <div class="patrocinadores-grid">
+                    <div class="patrocinador-logo">
+                        <img src="styles/assets/schneider.jpg" alt="Patrocinador 1">
+                    </div>
+                    <div class="patrocinador-logo">
+                        <img src="styles/assets/fortes_maquetes.jpg" alt="Patrocinador 2">
+                    </div>
+                    <div class="patrocinador-logo">
+                        <img src="styles/assets/radio-taxi.png" alt="Patrocinador 3">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Lumen Via</h3>
+                <p>Transformando cidades com tecnologia sustentável</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-envelope"></i> contatogobato@gmail.com</p>
+                <p><i class="fas fa-phone"></i> (11) 91263-4148</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/lumenviabr/" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Lumen Via. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/feceap.js" defer></script>
+    
+</body>
+
+</html>
