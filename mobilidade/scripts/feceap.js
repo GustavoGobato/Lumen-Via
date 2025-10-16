@@ -4,3 +4,10 @@ const maps = () => {
     "_blank"
   );
 };
+
+const ingresso = () => {
+  window.open(
+    "https://ceappedreira.org.br/feceap/?fbclid=PAZXh0bgNhZW0CMTEAAafQaN98fI8H2i2TWViZD76eeUy293uOI3CxOzbmfn-oaM9o2Y_pabj2JCkfuQ_aem_8W-duD1fqRtlRJYY6HvbEw",
+    "_blank"
+  );
+};
