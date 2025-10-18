@@ -11,3 +11,9 @@ const ingresso = () => {
     "_blank"
   );
 };
+const votar = () => {
+  window.open(
+    "http://tiny.cc/votacaofeceap",
+    "_blank"
+  );
+};
